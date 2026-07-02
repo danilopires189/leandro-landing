@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leandro Hair — The Art of Confidence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --preto: #0a0a0a;
+            --preto-2: #141414;
+            --verde: #00ff88;
+            --verde-dark: #00cc6a;
+            --dourado: #d4af37;
+            --off-white: #f5f5f0;
+            --cinza: #888;
+            --cinza-claro: #ccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--preto);
+            color: var(--off-white);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Noise */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 8px; height: 8px;
+            background: var(--verde);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor-ring {
+            width: 40px; height: 40px;
+            border: 1px solid var(--verde);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .cursor.hover { transform: scale(0); }
+        .cursor-ring.hover {
+            width: 80px; height: 80px;
+            border-color: var(--dourado);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--preto);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        .loader.done { transform: translateY(-100%); }
+
+        .loader-content {
+            text-align: center;
+            position: relative;
+        }
+
+        .loader-logo {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            letter-spacing: 10px;
+            color: var(--off-white);
+            line-height: 1;
+            overflow: hidden;
+        }
+
+        .loader-logo .word {
+            display: block;
+            overflow: hidden;
+        }
+
+        .loader-logo .word span {
+            display: inline-block;
+            transform: translateY(110%);
+            animation: slideUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        }
+
+        .loader-logo .word:nth-child(2) span {
+            animation-delay: 0.2s;
+            color: var(--verde);
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); }
+        }
+
+        .loader-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: var(--cinza);
+            margin-top: 30px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s ease 1s forwards;
+        }
+
+        .loader-line {
+            width: 200px;
+            height: 2px;
+            background: rgba(245, 245, 240, 0.1);
+            margin: 40px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-line::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--verde);
+            animation: loadLine 2.5s ease-in-out forwards;
+        }
+
+        @keyframes loadLine {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            color: var(--off-white);
+            text-decoration: none;
+        }
+        .logo span { color: var(--verde); }
+
+        .nav-center {
+            display: flex;
+            gap: 50px;
+        }
+        .nav-center a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        .nav-center a::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            width: 6px; height: 6px;
+            background: var(--verde);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translateY(-50%);
+            transition: opacity 0.3s ease;
+        }
+        .nav-center a:hover::before { opacity: 1; }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .header-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--off-white);
+            letter-spacing: 2px;
+        }
+
+        .header-cta {
+            background: var(--verde);
+            color: var(--preto);
+            padding: 14px 32px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .header-cta:hover {
+            background: var(--off-white);
+            transform: scale(1.05);
+        }
+
+        /* Side Nav */
+        .side-nav {
+            position: fixed;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .side-nav a {
+            width: 10px; height: 10px;
+            border: 1px solid var(--off-white);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .side-nav a::before {
+            content: attr(data-label);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: var(--off-white);
+        }
+        .side-nav a:hover::before { opacity: 1; }
+        .side-nav a.active {
+            background: var(--verde);
+            border-color: var(--verde);
+            transform: scale(1.5);
+        }
+
+        /* HERO - MASSIVE */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 150px 50px 50px;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+        .hero-bg-video img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3) contrast(1.2);
+        }
+
+        .hero-gradient {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 136, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, rgba(10,10,10,0.3), rgba(10,10,10,0.9));
+            z-index: 1;
+        }
+
+        .hero-grid {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,255,136,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,136,0.05) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(245,245,240,0.2);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--verde);
+            padding: 10px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--verde);
+        }
+
+        .hero-badge .pulse {
+            width: 8px; height: 8px;
+            background: var(--verde);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .hero-location {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--cinza);
+            text-transform: uppercase;
+        }
+        .hero-location span { color: var(--verde); }
+
+        .hero-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(5rem, 18vw, 20rem);
+            line-height: 0.85;
+            letter-spacing: -5px;
+            margin-bottom: 40px;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            transform: translateY(110%);
+            animation: slideUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        }
+
+        .hero-title .line:nth-child(1) span { animation-delay: 2s; }
+        .hero-title .line:nth-child(2) span { animation-delay: 2.2s; color: var(--verde); }
+        .hero-title .line:nth-child(3) span { animation-delay: 2.4s; }
+
+        .hero-title .outline {
+            -webkit-text-stroke: 2px var(--off-white);
+            color: transparent;
+        }
+
+        .hero-bottom {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            align-items: end;
+            padding-top: 50px;
+            border-top: 1px solid rgba(245,245,240,0.2);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--cinza-claro);
+            max-width: 500px;
+        }
+
+        .hero-desc strong {
+            color: var(--off-white);
+            font-weight: 600;
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hero-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+        }
+
+        .hero-stat-num {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: var(--verde);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cinza);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn-main {
+            background: var(--verde);
+            color: var(--preto);
+            padding: 22px 45px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            transition: all 0.4s ease;
+            border: 2px solid var(--verde);
+        }
+        .btn-main:hover {
+            background: transparent;
+            color: var(--verde);
+            transform: translateX(10px);
+        }
+
+        .btn-secondary {
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            color: var(--verde);
+            gap: 25px;
+        }
+
+        /* Floating Elements */
+        .floating-card {
+            position: absolute;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(245,245,240,0.1);
+            padding: 25px 30px;
+            z-index: 4;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-card.card-1 {
+            top: 30%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-card.card-2 {
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-card .fc-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cinza);
+            margin-bottom: 10px;
+        }
+
+        .floating-card .fc-value {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            color: var(--verde);
+            line-height: 1;
+        }
+
+        .floating-card .fc-sub {
+            font-size: 0.8rem;
+            color: var(--cinza-claro);
+            margin-top: 5px;
+        }
+
+        /* Marquee */
+        .marquee {
+            background: var(--verde);
+            padding: 25px 0;
+            overflow: hidden;
+            border-top: 2px solid var(--preto);
+            border-bottom: 2px solid var(--preto);
+        }
+        .marquee-track {
+            display: flex;
+            gap: 60px;
+            animation: marquee 20s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: var(--preto);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            letter-spacing: 3px;
+        }
+        .marquee-item .star {
+            color: var(--preto);
+            font-size: 2rem;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Manifesto */
+        .manifesto {
+            padding: 150px 50px;
+            background: var(--preto);
+            position: relative;
+        }
+
+        .manifesto-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 100px;
+        }
+
+        .manifesto-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--verde);
+            position: sticky;
+            top: 150px;
+            height: fit-content;
+        }
+
+        .manifesto-label .big-num {
+            font-family: 'Anton', sans-serif;
+            font-size: 8rem;
+            color: var(--verde);
+            line-height: 1;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .manifesto-content h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+            margin-bottom: 50px;
+        }
+
+        .manifesto-content h2 em {
+            color: var(--verde);
+            font-style: italic;
+        }
+
+        .manifesto-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--cinza-claro);
+            margin-bottom: 30px;
+        }
+
+        .manifesto-text:first-of-type::first-letter {
+            font-family: 'Anton', sans-serif;
+            font-size: 6rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 20px;
+            margin-top: 10px;
+            color: var(--verde);
+        }
+
+        /* Services - Cards */
+        .services {
+            padding: 150px 50px;
+            background: var(--preto-2);
+        }
+
+        .services-header {
+            max-width: 1400px;
+            margin: 0 auto 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .services-header .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--verde);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .services-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+        }
+
+        .services-header h2 em {
+            color: var(--verde);
+            font-style: italic;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: rgba(245,245,240,0.1);
+        }
+
+        .service-card {
+            background: var(--preto-2);
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--verde) 0%, var(--verde-dark) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover::before { opacity: 1; }
+        .service-card:hover { transform: translateY(-10px); }
+        .service-card > * { position: relative; z-index: 1; }
+        .service-card:hover h3,
+        .service-card:hover p,
+        .service-card:hover .service-num { color: var(--preto); }
+        .service-card:hover .service-link { color: var(--preto); }
+
+        .service-num {
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            color: var(--verde);
+            line-height: 1;
+            margin-bottom: 30px;
+            transition: color 0.5s ease;
+        }
+
+        .service-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            transition: color 0.5s ease;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--cinza);
+            margin-bottom: 30px;
+            transition: color 0.5s ease;
+        }
+
+        .service-link {
+            color: var(--verde);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover { gap: 20px; }
+
+        /* Process */
+        .process {
+            padding: 150px 50px;
+            background: var(--preto);
+        }
+
+        .process-header {
+            max-width: 1400px;
+            margin: 0 auto 100px;
+            text-align: center;
+        }
+
+        .process-header .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--verde);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .process-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+        }
+
+        .process-header h2 em {
+            color: var(--verde);
+            font-style: italic;
+        }
+
+        .process-timeline {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--verde), var(--dourado));
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-circle {
+            width: 80px; height: 80px;
+            background: var(--preto);
+            border: 2px solid var(--verde);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.8rem;
+            color: var(--verde);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover .step-circle {
+            background: var(--verde);
+            color: var(--preto);
+            transform: scale(1.2);
+        }
+
+        .process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--cinza);
+            line-height: 1.6;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 150px 50px;
+            background: var(--preto-2);
+        }
+
+        .gallery-header {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .gallery-header .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--verde);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .gallery-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+        }
+
+        .gallery-header h2 em {
+            color: var(--verde);
+            font-style: italic;
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease, filter 0.4s ease;
+            filter: grayscale(100%) brightness(0.7);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+
+        .gallery-overlay h4 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--verde);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 150px 50px;
+            background: var(--preto);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '"';
+            position: absolute;
+            top: 50px;
+            right: 100px;
+            font-family: 'Anton', sans-serif;
+            font-size: 30rem;
+            color: rgba(0, 255, 136, 0.05);
+            line-height: 1;
+        }
+
+        .testimonials-header {
+            max-width: 1400px;
+            margin: 0 auto 100px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials-header .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--verde);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .testimonials-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+        }
+
+        .testimonials-header h2 em {
+            color: var(--verde);
+            font-style: italic;
+        }
+
+        .testimonials-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-slide {
+            text-align: center;
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        .testimonial-slide.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .testimonial-text {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .testimonial-text em {
+            color: var(--verde);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .testimonial-author img {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--verde);
+        }
+
+        .testimonial-author h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-author p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--cinza);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 60px;
+        }
+
+        .testimonial-dot {
+            width: 40px; height: 3px;
+            background: rgba(245,245,240,0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--verde);
+            width: 80px;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 200px 50px;
+            background: linear-gradient(135deg, var(--verde) 0%, var(--verde-dark) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 30px,
+                rgba(0,0,0,0.05) 30px,
+                rgba(0,0,0,0.05) 60px
+            );
+            animation: moveStripes 15s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--preto);
+            margin-bottom: 30px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .cta h2 {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 1;
+            color: var(--preto);
+            margin-bottom: 40px;
+        }
+
+        .cta h2 em {
+            font-style: italic;
+            color: var(--preto);
+            opacity: 0.7;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            color: rgba(10,10,10,0.8);
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .btn-cta {
+            background: var(--preto);
+            color: var(--verde);
+            padding: 28px 70px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.4s ease;
+            border: 3px solid var(--preto);
+        }
+
+        .btn-cta:hover {
+            background: transparent;
+            color: var(--preto);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--preto);
+            color: var(--off-white);
+            padding: 100px 50px 40px;
+            border-top: 1px solid rgba(245,245,240,0.1);
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .footer-brand h3 span { color: var(--verde); }
+
+        .footer-brand p {
+            color: var(--cinza);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 45px; height: 45px;
+            border: 1px solid rgba(245,245,240,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--off-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--verde);
+            border-color: var(--verde);
+            color: var(--preto);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: var(--verde);
+        }
+
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 15px; }
+        .footer-section ul li a {
+            color: var(--cinza);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .footer-section ul li a:hover { color: var(--verde); }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(245,245,240,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--cinza);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .cursor, .cursor-ring { display: none; }
+            body { cursor: auto; }
+            .header { padding: 20px 30px; }
+            .nav-center, .header-time { display: none; }
+            .side-nav { display: none; }
+
+            .hero { padding: 130px 30px 50px; }
+            .hero-title { font-size: 5rem; letter-spacing: -2px; }
+            .hero-bottom { grid-template-columns: 1fr; gap: 30px; }
+            .floating-card { display: none; }
+
+            .manifesto-container { grid-template-columns: 1fr; gap: 50px; }
+            .manifesto-label { position: static; }
+
+            .services-grid,
+            .process-timeline,
+            .gallery-grid,
+            .testimonials-grid { grid-template-columns: 1fr; }
+
+            .gallery-item:first-child { grid-column: span 1; grid-row: span 1; }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 50px; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <div class="word"><span>ÍNTEGRA</span></div>
+                <div class="word"><span>CAPILAR</span></div>
+            </div>
+            <div class="loader-sub">The Art of Confidence • Est. 2018</div>
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">ÍNTEGRA<span>.</span></a>
+        <nav class="nav-center">
+            <a href="#manifesto">Manifesto</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#processo">Processo</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#contato">Contato</a>
+        </nav>
+        <div class="header-right">
+            <div class="header-time" id="headerTime">00:00:00</div>
+            <a href="https://wa.me/5511999999999" class="header-cta">Agendar →</a>
+        </div>
+    </header>
+
+    <!-- Side Nav -->
+    <nav class="side-nav">
+        <a href="#hero" data-label="Início" class="active"></a>
+        <a href="#manifesto" data-label="Manifesto"></a>
+        <a href="#servicos" data-label="Serviços"></a>
+        <a href="#processo" data-label="Processo"></a>
+        <a href="#galeria" data-label="Galeria"></a>
+        <a href="#depoimentos" data-label="Depoimentos"></a>
+        <a href="#contato" data-label="Contato"></a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-video">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop" alt="Homem confiante">
+        </div>
+        <div class="hero-gradient"></div>
+        <div class="hero-grid"></div>
+
+        <div class="hero-content">
+            <div class="hero-top-bar">
+                <div class="hero-badge">
+                    <div class="pulse"></div>
+                    <span>Prótese Capilar Masculina Premium</span>
+                </div>
+                <div class="hero-location">
+                    <span>●</span> São Paulo, Brasil
+                </div>
+            </div>
+
+            <h1 class="hero-title">
+                <div class="line"><span>REDEFINA</span></div>
+                <div class="line"><span>SUA IMAGEM</span></div>
+                <div class="line"><span class="outline">COM EXCELÊNCIA</span></div>
+            </h1>
+        </div>
+
+        <div class="hero-bottom">
+            <p class="hero-desc">
+                <strong>Tecnologia de ponta</strong>, acabamento artesanal e atendimento discreto 
+                para homens que exigem o extraordinário. Resultados que transcendem o estético 
+                e transformam a forma como você se vê.
+            </p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">500+</div>
+                    <div class="hero-stat-label">Vidas Transformadas</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">8+</div>
+                    <div class="hero-stat-label">Anos de Excelência</div>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="https://wa.me/5511999999999" class="btn-main">
+                    <span>Agendar Avaliação</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#manifesto" class="btn-secondary">
+                    Conhecer mais <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="floating-card card-1">
+            <div class="fc-label">Resultado</div>
+            <div class="fc-value">100%</div>
+            <div class="fc-sub">Natural & Indetectável</div>
+        </div>
+
+        <div class="floating-card card-2">
+            <div class="fc-label">Satisfação</div>
+            <div class="fc-value">98%</div>
+            <div class="fc-sub">Clientes Recomendam</div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-track">
+            <div class="marquee-item">NATURALIDADE <span class="star">★</span> DISCRIÇÃO <span class="star">★</span> EXCELÊNCIA <span class="star">★</span> CONFIANÇA <span class="star">★</span></div>
+            <div class="marquee-item">NATURALIDADE <span class="star">★</span> DISCRIÇÃO <span class="star">★</span> EXCELÊNCIA <span class="star">★</span> CONFIANÇA <span class="star">★</span></div>
+        </div>
+    </div>
+
+    <!-- Manifesto -->
+    <section class="manifesto" id="manifesto">
+        <div class="manifesto-container">
+            <div class="manifesto-label">
+                <span class="big-num">01</span>
+                <span>Manifesto</span>
+            </div>
+            <div class="manifesto-content">
+                <h2>Acreditamos que todo homem merece se olhar no espelho e se <em>reconhecer</em></h2>
+                <p class="manifesto-text">
+                    A Leandro Hair nasceu da convicção de que a autoestima não é vaidade — é necessidade fundamental. 
+                    Criamos um espaço onde tecnologia de ponta encontra atendimento humanizado, onde cada detalhe é 
+                    pensado para entregar resultados que transcendem o estético.
+                </p>
+                <p class="manifesto-text">
+                    Nossa missão é restaurar não apenas cabelos, mas a confiança de homens que buscam viver plenamente, 
+                    sem limitações impostas pela aparência. Cada cliente é uma história única, e cada transformação 
+                    é uma nova página.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="servicos">
+        <div class="services-header">
+            <div>
+                <span class="label">Nossos Serviços</span>
+                <h2>Soluções <em>sob medida</em></h2>
+            </div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-num">01</div>
+                <h3>Prótese Capilar</h3>
+                <p>Soluções personalizadas com tecnologia de última geração para resultados indetectáveis e conforto absoluto.</p>
+                <a href="#" class="service-link">Detalhes <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-num">02</div>
+                <h3>Aplicação</h3>
+                <p>Processo realizado por especialistas em ambiente privativo com acabamento impecável.</p>
+                <a href="#" class="service-link">Detalhes <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-num">03</div>
+                <h3>Manutenção</h3>
+                <p>Acompanhamento contínuo com higienização, ajustes e revitalização profissional.</p>
+                <a href="#" class="service-link">Detalhes <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-num">04</div>
+                <h3>Consultoria</h3>
+                <p>Avaliação individualizada para entender suas necessidades e criar o plano perfeito.</p>
+                <a href="#" class="service-link">Detalhes <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-num">05</div>
+                <h3>Revitalização</h3>
+                <p>Cuidados especializados para manter sua prótese sempre como nova.</p>
+                <a href="#" class="service-link">Detalhes <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-num">06</div>
+                <h3>Suporte 24h</h3>
+                <p>Atendimento dedicado para tirar dúvidas e oferecer orientações a longo prazo.</p>
+                <a href="#" class="service-link">Detalhes <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="processo">
+        <div class="process-header">
+            <span class="label">Como Funciona</span>
+            <h2>Nosso <em>processo</em></h2>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-circle">01</div>
+                <h3>Consulta</h3>
+                <p>Conversa discreta para entender suas expectativas e avaliar o couro cabeludo.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">02</div>
+                <h3>Design</h3>
+                <p>Escolha de cor, textura e densidade que harmonizam com suas características.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">03</div>
+                <h3>Aplicação</h3>
+                <p>Processo em ambiente privativo, com conforto absoluto e resultado imediato.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">04</div>
+                <h3>Acompanhamento</h3>
+                <p>Suporte contínuo e manutenções periódicas para garantir durabilidade.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="galeria">
+        <div class="gallery-header">
+            <div>
+                <span class="label">Galeria Real</span>
+                <h2>Resultados <em>autênticos</em></h2>
+            </div>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=800&fit=crop" alt="Resultado">
+                <div class="gallery-overlay">
+                    <h4>Carlos, 42</h4>
+                    <p>São Paulo, SP</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=600&h=600&fit=crop" alt="Resultado">
+                <div class="gallery-overlay">
+                    <h4>Ricardo, 38</h4>
+                    <p>Rio de Janeiro, RJ</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=600&fit=crop" alt="Resultado">
+                <div class="gallery-overlay">
+                    <h4>Fernando, 45</h4>
+                    <p>Belo Horizonte, MG</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop" alt="Resultado">
+                <div class="gallery-overlay">
+                    <h4>André, 35</h4>
+                    <p>Curitiba, PR</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop" alt="Resultado">
+                <div class="gallery-overlay">
+                    <h4>Marcos, 50</h4>
+                    <p>Porto Alegre, RS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="depoimentos">
+        <div class="testimonials-header">
+            <span class="label">Depoimentos</span>
+            <h2>Histórias que <em>inspiram</em></h2>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial-slide active">
+                <p class="testimonial-text">"Voltei a me sentir <em>confiante</em> em qualquer ocasião. O resultado é tão natural que ninguém percebe."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Carlos">
+                    <div>
+                        <h4>Carlos Mendes</h4>
+                        <p>Empresário, 42 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"Atendimento impecável e resultado <em>extremamente natural</em>. Finalmente encontrei o lugar certo."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=100&h=100&fit=crop" alt="Ricardo">
+                    <div>
+                        <h4>Ricardo Almeida</h4>
+                        <p>Advogado, 38 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"A experiência foi <em>discreta e transformadora</em>. Minha autoestima voltou a subir."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Fernando">
+                    <div>
+                        <h4>Fernando Souza</h4>
+                        <p>Médico, 45 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <button class="testimonial-dot active" data-slide="0"></button>
+                <button class="testimonial-dot" data-slide="1"></button>
+                <button class="testimonial-dot" data-slide="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contato">
+        <div class="cta-content">
+            <span class="cta-label">Dê o Primeiro Passo</span>
+            <h2>Sua melhor versão<br><em>começa agora</em></h2>
+            <p>Agende uma avaliação gratuita e descubra como podemos transformar sua imagem com naturalidade, discrição e excelência.</p>
+            <a href="https://wa.me/5511999999999" class="btn-cta">
+                <i class="fab fa-whatsapp"></i>
+                Agendar pelo WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>ÍNTEGRA<span>.</span></h3>
+                <p>Excelência em prótese capilar masculina. Transformando vidas com tecnologia, discrição e resultados naturais desde 2018.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#manifesto">Manifesto</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#processo">Processo</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#">Prótese Capilar</a></li>
+                    <li><a href="#">Aplicação</a></li>
+                    <li><a href="#">Manutenção</a></li>
+                    <li><a href="#">Consultoria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">Av. Paulista, 1000</a></li>
+                    <li><a href="#">São Paulo - SP</a></li>
+                    <li><a href="#">(11) 99999-9999</a></li>
+                    <li><a href="#">contato@leandrohair.com.br</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Leandro Hair. Todos os direitos reservados.</p>
+            <p>Design & Precision</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('done');
+            }, 3000);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorRing = document.querySelector('.cursor-ring');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 4 + 'px';
+            cursor.style.top = e.clientY - 4 + 'px';
+            
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX - 20 + 'px';
+                cursorRing.style.top = e.clientY - 20 + 'px';
+            }, 100);
+        });
+
+        document.querySelectorAll('a, button, .service-card, .gallery-item, .process-step').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorRing.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorRing.classList.remove('hover');
+            });
+        });
+
+        // Header Time
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('pt-BR', { hour12: false });
+            document.getElementById('headerTime').textContent = time;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Side Nav Active
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.side-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Testimonials Slider
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 6000);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Parallax
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg-video img');
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px) scale(1.1)`;
+            }
+        });
+    </script>
+</body>
+</html>

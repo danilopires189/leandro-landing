@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leandro Hair — Cinematic Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --preto: #050505;
+            --preto-suave: #0f0f0f;
+            --verde: #2d5a3d;
+            --verde-claro: #4a7c59;
+            --dourado: #c9a961;
+            --dourado-claro: #e8c87a;
+            --amber: #d4a373;
+            --creme: #f5f1e8;
+            --cinza: #8a8a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--preto);
+            color: var(--creme);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Film Grain Overlay */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 8px;
+            height: 8px;
+            background: var(--dourado);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--dourado);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .cursor.hover {
+            transform: scale(0);
+        }
+
+        .cursor-ring.hover {
+            width: 80px;
+            height: 80px;
+            border-color: var(--verde-claro);
+            background: rgba(74, 124, 89, 0.1);
+        }
+
+        /* Loader Cinematic */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--preto);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            color: var(--creme);
+            letter-spacing: 20px;
+            overflow: hidden;
+        }
+
+        .loader-logo span {
+            display: inline-block;
+            transform: translateY(100%);
+            animation: revealText 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        }
+
+        .loader-logo span:nth-child(1) { animation-delay: 0.1s; }
+        .loader-logo span:nth-child(2) { animation-delay: 0.2s; }
+        .loader-logo span:nth-child(3) { animation-delay: 0.3s; }
+        .loader-logo span:nth-child(4) { animation-delay: 0.4s; }
+        .loader-logo span:nth-child(5) { animation-delay: 0.5s; }
+        .loader-logo span:nth-child(6) { animation-delay: 0.6s; }
+        .loader-logo span:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes revealText {
+            to { transform: translateY(0); }
+        }
+
+        .loader-line {
+            width: 200px;
+            height: 1px;
+            background: rgba(245, 241, 232, 0.2);
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dourado);
+            animation: loadLine 2s ease-in-out forwards;
+        }
+
+        @keyframes loadLine {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        .loader-text {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--cinza);
+            margin-top: 20px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--creme);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .nav-logo em {
+            font-style: italic;
+            color: var(--dourado);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--creme);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--dourado);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: transparent;
+            color: var(--creme);
+            padding: 12px 30px;
+            border: 1px solid var(--creme);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--dourado);
+            border-color: var(--dourado);
+            color: var(--preto);
+        }
+
+        /* Hero Cinematic */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 60px 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) contrast(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(5, 5, 5, 0.3) 0%,
+                rgba(5, 5, 5, 0.6) 50%,
+                rgba(5, 5, 5, 0.95) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-aurora {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(45, 90, 61, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 169, 97, 0.2) 0%, transparent 50%);
+            z-index: 2;
+            animation: aurora 10s ease-in-out infinite;
+        }
+
+        @keyframes aurora {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--dourado);
+        }
+
+        .hero-meta::before {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--dourado);
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 300;
+            line-height: 0.95;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero h1 .line span {
+            display: inline-block;
+            transform: translateY(100%);
+            animation: slideUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        }
+
+        .hero h1 .line:nth-child(1) span { animation-delay: 1.5s; }
+        .hero h1 .line:nth-child(2) span { animation-delay: 1.7s; }
+        .hero h1 .line:nth-child(3) span { animation-delay: 1.9s; }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); }
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--dourado);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 500px;
+            margin-bottom: 50px;
+            color: rgba(245, 241, 232, 0.8);
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .btn-cinematic {
+            background: var(--dourado);
+            color: var(--preto);
+            padding: 22px 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cinematic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--creme);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            z-index: 0;
+        }
+
+        .btn-cinematic:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-cinematic span,
+        .btn-cinematic i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-cinematic:hover {
+            transform: translateX(10px);
+        }
+
+        .btn-ghost {
+            color: var(--creme);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ghost:hover {
+            color: var(--dourado);
+            gap: 25px;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--dourado);
+        }
+
+        .hero-scroll::after {
+            content: '';
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--dourado), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; height: 60px; }
+            50% { opacity: 0.3; height: 30px; }
+        }
+
+        /* Horizontal Scroll Section */
+        .horizontal-section {
+            padding: 150px 0;
+            background: var(--preto);
+            overflow: hidden;
+        }
+
+        .horizontal-header {
+            padding: 0 60px;
+            margin-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .horizontal-header .label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .horizontal-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .horizontal-header h2 em {
+            font-style: italic;
+            color: var(--verde-claro);
+        }
+
+        .horizontal-track {
+            display: flex;
+            gap: 40px;
+            padding: 0 60px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .horizontal-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .horizontal-card {
+            min-width: 500px;
+            height: 700px;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .horizontal-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .horizontal-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .horizontal-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 50px;
+            background: linear-gradient(to top, rgba(5,5,5,0.95), transparent);
+        }
+
+        .horizontal-card-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: var(--dourado);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .horizontal-card h3 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .horizontal-card p {
+            font-size: 0.95rem;
+            color: rgba(245, 241, 232, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Split Section */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+            background: var(--preto-suave);
+        }
+
+        .split-left {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .split-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: filter 0.6s ease;
+        }
+
+        .split-left:hover img {
+            filter: grayscale(0%);
+        }
+
+        .split-right {
+            padding: 100px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .split-right .label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 30px;
+        }
+
+        .split-right h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+
+        .split-right h2 em {
+            font-style: italic;
+            color: var(--verde-claro);
+        }
+
+        .split-right p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(245, 241, 232, 0.7);
+            margin-bottom: 25px;
+        }
+
+        .split-features {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .split-feature {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(245, 241, 232, 0.1);
+        }
+
+        .split-feature-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--dourado);
+            font-weight: 300;
+        }
+
+        .split-feature-text h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .split-feature-text p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--cinza);
+        }
+
+        /* Services Grid */
+        .services {
+            padding: 150px 60px;
+            background: var(--preto);
+        }
+
+        .services-header {
+            max-width: 1400px;
+            margin: 0 auto 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .services-header .label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .services-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .services-header h2 em {
+            font-style: italic;
+            color: var(--verde-claro);
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: rgba(245, 241, 232, 0.1);
+        }
+
+        .service-item {
+            background: var(--preto);
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            cursor: pointer;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--verde) 0%, var(--preto) 100%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .service-item:hover::before {
+            opacity: 1;
+        }
+
+        .service-item > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-item:hover {
+            transform: scale(1.02);
+        }
+
+        .service-item-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--dourado);
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+
+        .service-item h3 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .service-item p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(245, 241, 232, 0.6);
+            margin-bottom: 30px;
+        }
+
+        .service-item-link {
+            color: var(--dourado);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: gap 0.3s ease;
+        }
+
+        .service-item:hover .service-item-link {
+            gap: 20px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 150px 60px;
+            background: var(--preto-suave);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '"';
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 30rem;
+            color: rgba(201, 169, 97, 0.05);
+            line-height: 1;
+        }
+
+        .testimonials-header {
+            max-width: 1400px;
+            margin: 0 auto 100px;
+            text-align: center;
+        }
+
+        .testimonials-header .label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .testimonials-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+        }
+
+        .testimonials-header h2 em {
+            font-style: italic;
+            color: var(--verde-claro);
+        }
+
+        .testimonials-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slide {
+            text-align: center;
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.4;
+            margin-bottom: 50px;
+            color: var(--creme);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .testimonial-author img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--dourado);
+        }
+
+        .testimonial-author h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .testimonial-author p {
+            font-size: 0.85rem;
+            color: var(--cinza);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .testimonial-dot {
+            width: 50px;
+            height: 2px;
+            background: rgba(245, 241, 232, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--dourado);
+            width: 80px;
+        }
+
+        /* CTA Cinematic */
+        .cta {
+            padding: 200px 60px;
+            background: linear-gradient(135deg, var(--verde) 0%, var(--preto) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(201, 169, 97, 0.1) 0%, transparent 70%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .cta h2 {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 40px;
+        }
+
+        .cta h2 em {
+            font-style: italic;
+            color: var(--dourado);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: rgba(245, 241, 232, 0.8);
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .btn-cta {
+            background: var(--dourado);
+            color: var(--preto);
+            padding: 28px 70px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.4s ease;
+            border: 2px solid var(--dourado);
+        }
+
+        .btn-cta:hover {
+            background: transparent;
+            color: var(--dourado);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--preto);
+            color: var(--creme);
+            padding: 100px 60px 40px;
+            border-top: 1px solid rgba(245, 241, 232, 0.1);
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+        }
+
+        .footer-brand h3 em {
+            font-style: italic;
+            color: var(--dourado);
+        }
+
+        .footer-brand p {
+            color: var(--cinza);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(245, 241, 232, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--creme);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--dourado);
+            border-color: var(--dourado);
+            color: var(--preto);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: var(--dourado);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul li a {
+            color: var(--cinza);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--dourado);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(245, 241, 232, 0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--cinza);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .cursor, .cursor-ring {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .nav {
+                padding: 20px 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 0 30px 60px;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .horizontal-card {
+                min-width: 350px;
+                height: 500px;
+            }
+
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+
+            .split-right {
+                padding: 80px 30px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Film Grain -->
+    <div class="grain"></div>
+
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-logo">
+            <span>Í</span><span>N</span><span>T</span><span>E</span><span>G</span><span>R</span><span>A</span>
+        </div>
+        <div class="loader-line"></div>
+        <div class="loader-text">Carregando experiência</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">Leandro Hair <em>Capilar</em></a>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+        <a href="https://wa.me/5511999999999" class="nav-cta">Agendar</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop" alt="Homem confiante">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-aurora"></div>
+        <div class="hero-content">
+            <div class="hero-meta">Prótese Capilar Masculina Premium</div>
+            <h1>
+                <div class="line"><span>Redefina</span></div>
+                <div class="line"><span>sua <em>imagem</em></span></div>
+                <div class="line"><span>com excelência</span></div>
+            </h1>
+            <p class="hero-description">
+                Tecnologia de ponta, acabamento artesanal e atendimento discreto para homens 
+                que exigem o extraordinário. Resultados que transcendem o estético.
+            </p>
+            <div class="hero-actions">
+                <a href="https://wa.me/5511999999999" class="btn-cinematic">
+                    <span>Agendar Avaliação</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#servicos" class="btn-ghost">
+                    Explorar serviços <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">Scroll</div>
+    </section>
+
+    <!-- Horizontal Scroll -->
+    <section class="horizontal-section" id="servicos">
+        <div class="horizontal-header">
+            <div>
+                <span class="label">Nossos Serviços</span>
+                <h2>Soluções <em>sob medida</em></h2>
+            </div>
+        </div>
+        <div class="horizontal-track">
+            <div class="horizontal-card">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=1000&fit=crop" alt="Prótese Capilar">
+                <div class="horizontal-card-overlay">
+                    <div class="horizontal-card-number">01</div>
+                    <h3>Prótese Capilar</h3>
+                    <p>Soluções personalizadas com tecnologia de última geração para resultados indetectáveis.</p>
+                </div>
+            </div>
+            <div class="horizontal-card">
+                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102eb1b?w=800&h=1000&fit=crop" alt="Aplicação">
+                <div class="horizontal-card-overlay">
+                    <div class="horizontal-card-number">02</div>
+                    <h3>Aplicação Premium</h3>
+                    <p>Processo realizado por especialistas em ambiente privativo com acabamento impecável.</p>
+                </div>
+            </div>
+            <div class="horizontal-card">
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&h=1000&fit=crop" alt="Manutenção">
+                <div class="horizontal-card-overlay">
+                    <div class="horizontal-card-number">03</div>
+                    <h3>Manutenção</h3>
+                    <p>Acompanhamento contínuo com higienização, ajustes e revitalização profissional.</p>
+                </div>
+            </div>
+            <div class="horizontal-card">
+                <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=800&h=1000&fit=crop" alt="Consultoria">
+                <div class="horizontal-card-overlay">
+                    <div class="horizontal-card-number">04</div>
+                    <h3>Consultoria</h3>
+                    <p>Avaliação individualizada para entender suas necessidades e criar o plano perfeito.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Section -->
+    <section class="split-section" id="sobre">
+        <div class="split-left">
+            <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=900&h=1200&fit=crop" alt="Atendimento">
+        </div>
+        <div class="split-right">
+            <span class="label">Nossa Filosofia</span>
+            <h2>Excelência que <em>transforma</em> vidas</h2>
+            <p>
+                Acreditamos que a autoestima não é vaidade — é necessidade fundamental. 
+                Cada cliente é uma história única, e cada transformação é uma nova página.
+            </p>
+            <p>
+                Combinamos tecnologia de ponta com atendimento humanizado para entregar 
+                resultados que transcendem o estético.
+            </p>
+            <div class="split-features">
+                <div class="split-feature">
+                    <div class="split-feature-number">01</div>
+                    <div class="split-feature-text">
+                        <h4>Atendimento Personalizado</h4>
+                        <p>Cada detalhe pensado para você</p>
+                    </div>
+                </div>
+                <div class="split-feature">
+                    <div class="split-feature-number">02</div>
+                    <div class="split-feature-text">
+                        <h4>Resultado Natural</h4>
+                        <p>Aparência 100% indetectável</p>
+                    </div>
+                </div>
+                <div class="split-feature">
+                    <div class="split-feature-number">03</div>
+                    <div class="split-feature-text">
+                        <h4>Suporte Contínuo</h4>
+                        <p>Acompanhamento pós-procedimento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services">
+        <div class="services-header">
+            <div>
+                <span class="label">O Que Oferecemos</span>
+                <h2>Serviços <em>completos</em></h2>
+            </div>
+        </div>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-item-number">01</div>
+                <h3>Prótese Capilar Masculina</h3>
+                <p>Soluções personalizadas com tecnologia de última geração para resultados indetectáveis e conforto absoluto.</p>
+                <a href="#" class="service-item-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-item-number">02</div>
+                <h3>Aplicação Especializada</h3>
+                <p>Processo realizado por especialistas em ambiente privativo, garantindo fixação segura e acabamento impecável.</p>
+                <a href="#" class="service-item-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-item-number">03</div>
+                <h3>Manutenção & Cuidados</h3>
+                <p>Acompanhamento contínuo com higienização, ajustes e revitalização para manter sua prótese sempre perfeita.</p>
+                <a href="#" class="service-item-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-item-number">04</div>
+                <h3>Consultoria Personalizada</h3>
+                <p>Avaliação individualizada para entender suas necessidades e criar o plano perfeito para seu caso.</p>
+                <a href="#" class="service-item-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-item-number">05</div>
+                <h3>Revitalização Premium</h3>
+                <p>Cuidados especializados com produtos de alta qualidade para manter o aspecto natural e duradouro.</p>
+                <a href="#" class="service-item-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-item-number">06</div>
+                <h3>Suporte Dedicado</h3>
+                <p>Atendimento 24h para tirar dúvidas, oferecer orientações e garantir sua satisfação a longo prazo.</p>
+                <a href="#" class="service-item-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="depoimentos">
+        <div class="testimonials-header">
+            <span class="label">Depoimentos</span>
+            <h2>Histórias que <em>inspiram</em></h2>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial-slide active">
+                <p class="testimonial-text">"Voltei a me sentir confiante em qualquer ocasião. O resultado é tão natural que ninguém percebe. Atendimento impecável do início ao fim."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Carlos">
+                    <div>
+                        <h4>Carlos Mendes</h4>
+                        <p>Empresário, 42 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"Atendimento impecável e resultado extremamente natural. Finalmente encontrei um lugar que entende as necessidades do homem moderno."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=100&h=100&fit=crop" alt="Ricardo">
+                    <div>
+                        <h4>Ricardo Almeida</h4>
+                        <p>Advogado, 38 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"A experiência foi discreta, acolhedora e transformadora. Minha autoestima voltou a subir e isso refletiu em todas as áreas da minha vida."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Fernando">
+                    <div>
+                        <h4>Fernando Souza</h4>
+                        <p>Médico, 45 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <button class="testimonial-dot active" data-slide="0"></button>
+                <button class="testimonial-dot" data-slide="1"></button>
+                <button class="testimonial-dot" data-slide="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contato">
+        <div class="cta-content">
+            <span class="cta-label">Dê o Primeiro Passo</span>
+            <h2>Sua melhor versão<br>começa <em>agora</em></h2>
+            <p>Agende uma avaliação gratuita e descubra como podemos transformar sua imagem com naturalidade, discrição e excelência.</p>
+            <a href="https://wa.me/5511999999999" class="btn-cta">
+                <i class="fab fa-whatsapp"></i>
+                Agendar Atendimento
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Leandro Hair <em>Capilar</em></h3>
+                <p>Excelência em prótese capilar masculina. Transformando vidas com tecnologia, discrição e resultados naturais desde 2018.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#">Prótese Capilar</a></li>
+                    <li><a href="#">Aplicação</a></li>
+                    <li><a href="#">Manutenção</a></li>
+                    <li><a href="#">Consultoria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">Av. Paulista, 1000</a></li>
+                    <li><a href="#">São Paulo - SP</a></li>
+                    <li><a href="#">(11) 99999-9999</a></li>
+                    <li><a href="#">contato@leandrohair.com.br</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Leandro Hair. Todos os direitos reservados.</p>
+            <p>Desenvolvido com excelência</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('hidden');
+            }, 2500);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorRing = document.querySelector('.cursor-ring');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 4 + 'px';
+            cursor.style.top = e.clientY - 4 + 'px';
+            
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX - 20 + 'px';
+                cursorRing.style.top = e.clientY - 20 + 'px';
+            }, 100);
+        });
+
+        document.querySelectorAll('a, button, .horizontal-card, .service-item').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorRing.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorRing.classList.remove('hover');
+            });
+        });
+
+        // Testimonials Slider
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 6000);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg img');
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

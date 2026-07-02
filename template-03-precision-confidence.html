@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leandro Hair — Precision & Confidence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bone: #F4F3EE;
+            --ink: #111111;
+            --cobalt: #2563EB;
+            --gray: #888888;
+            --border: #E0DDD5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bone);
+            color: var(--ink);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+        }
+
+        /* Noise Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px; height: 20px;
+            border: 1px solid var(--ink);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor.hover {
+            transform: scale(2.5);
+            background: var(--cobalt);
+            border-color: var(--cobalt);
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: var(--cobalt);
+            z-index: 1001;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(244, 243, 238, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        .logo em { font-style: italic; color: var(--cobalt); }
+
+        .nav-links {
+            display: flex; gap: 40px; list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none; color: var(--ink);
+            font-size: 0.85rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 1px;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 1px; background: var(--cobalt);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-cta {
+            background: var(--ink); color: var(--bone);
+            padding: 12px 30px; text-decoration: none;
+            font-size: 0.8rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .header-cta:hover { background: var(--cobalt); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-content {
+            padding: 150px 50px 80px;
+            display: flex; flex-direction: column; justify-content: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .hero-meta {
+            display: flex; align-items: center; gap: 15px;
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--gray);
+            margin-bottom: 40px;
+        }
+        .hero-meta::before {
+            content: ''; width: 30px; height: 1px; background: var(--cobalt);
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 8vw, 9rem);
+            line-height: 0.95;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--cobalt);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem; line-height: 1.6;
+            max-width: 500px; color: var(--gray);
+            margin-bottom: 50px;
+        }
+
+        .hero-actions {
+            display: flex; gap: 20px; align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--ink); color: var(--bone);
+            padding: 20px 45px; text-decoration: none;
+            font-weight: 600; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            display: inline-flex; align-items: center; gap: 15px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover { background: var(--cobalt); transform: translateY(-3px); }
+
+        .btn-secondary {
+            color: var(--ink); text-decoration: none;
+            font-weight: 600; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            display: inline-flex; align-items: center; gap: 10px;
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover { color: var(--cobalt); border-color: var(--cobalt); }
+
+        .hero-visual {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-visual img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(20%);
+        }
+        .hero-visual-overlay {
+            position: absolute; top: 30px; left: 30px;
+            background: var(--bone); padding: 15px 25px;
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px; font-weight: 600;
+        }
+        .hero-visual-overlay span { color: var(--cobalt); }
+
+        /* Marquee */
+        .marquee {
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            padding: 30px 0;
+        }
+        .marquee-track {
+            display: flex; gap: 60px;
+            animation: marquee 25s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            white-space: nowrap;
+            display: flex; align-items: center; gap: 60px;
+        }
+        .marquee-item em { font-style: italic; color: var(--cobalt); }
+        .marquee-item .dot {
+            width: 10px; height: 10px; background: var(--ink); border-radius: 50%;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Grid Section (About) */
+        .grid-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+        .grid-block {
+            padding: 80px 50px;
+            border-right: 1px solid var(--border);
+        }
+        .grid-block:last-child { border-right: none; }
+
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 3px; color: var(--cobalt);
+            margin-bottom: 30px; display: block;
+            font-weight: 600;
+        }
+
+        .grid-block h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1; margin-bottom: 30px;
+        }
+        .grid-block h2 em { font-style: italic; color: var(--cobalt); }
+
+        .grid-block p {
+            font-size: 1.05rem; line-height: 1.7;
+            color: var(--gray); margin-bottom: 20px;
+        }
+
+        .stats-row {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 30px; margin-top: 50px;
+            padding-top: 30px; border-top: 1px solid var(--border);
+        }
+        .stat-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3.5rem; line-height: 1;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--gray);
+        }
+
+        /* Services Grid */
+        .services {
+            border-bottom: 1px solid var(--border);
+        }
+        .services-header {
+            padding: 80px 50px;
+            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: end;
+        }
+        .services-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+        }
+        .services-header h2 em { font-style: italic; color: var(--cobalt); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .service-card {
+            padding: 60px 50px;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .service-card:nth-child(3n) { border-right: none; }
+        
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--ink);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+            z-index: 0;
+        }
+        .service-card:hover::before { transform: translateY(0); }
+        .service-card:hover { color: var(--bone); }
+        .service-card:hover .service-desc { color: rgba(244,243,238,0.7); }
+        .service-card:hover .service-num { color: var(--cobalt); }
+
+        .service-card > * { position: relative; z-index: 1; }
+
+        .service-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 4rem; line-height: 1;
+            margin-bottom: 30px; transition: color 0.4s ease;
+        }
+        .service-card h3 {
+            font-size: 2rem; margin-bottom: 20px;
+        }
+        .service-desc {
+            font-size: 0.95rem; line-height: 1.6;
+            color: var(--gray); margin-bottom: 30px;
+            transition: color 0.4s ease;
+        }
+        .service-link {
+            font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 2px; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 50px;
+            border-bottom: 1px solid var(--border);
+        }
+        .process-header {
+            margin-bottom: 80px;
+        }
+        .process-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+        }
+        .process-header h2 em { font-style: italic; color: var(--cobalt); }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+        .process-step {
+            padding: 40px 30px;
+            border-right: 1px solid var(--border);
+            position: relative;
+        }
+        .process-step:last-child { border-right: none; }
+        
+        .process-step::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 0; height: 3px; background: var(--cobalt);
+            transition: width 0.4s ease;
+        }
+        .process-step:hover::before { width: 100%; }
+
+        .step-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 5rem; line-height: 1;
+            color: var(--border); margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        .process-step:hover .step-num { color: var(--cobalt); }
+
+        .process-step h3 {
+            font-size: 1.8rem; margin-bottom: 15px;
+        }
+        .process-step p {
+            font-size: 0.95rem; line-height: 1.6; color: var(--gray);
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid var(--border);
+        }
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-right: 1px solid var(--border);
+            position: relative;
+            cursor: pointer;
+        }
+        .gallery-item:nth-child(4n) { border-right: none; }
+        
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease, filter 0.4s ease;
+            filter: grayscale(100%);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1); filter: grayscale(0%);
+        }
+        
+        .gallery-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: var(--bone);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+        .gallery-overlay h4 { font-size: 1.5rem; margin-bottom: 5px; }
+        .gallery-overlay p { font-size: 0.8rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 50px;
+            border-bottom: 1px solid var(--border);
+            background: var(--ink);
+            color: var(--bone);
+        }
+        .testimonials-header {
+            margin-bottom: 80px;
+        }
+        .testimonials-header .section-label { color: var(--cobalt); }
+        .testimonials-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+        }
+        .testimonials-header h2 em { font-style: italic; color: var(--cobalt); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .testimonial-card {
+            border: 1px solid rgba(244,243,238,0.2);
+            padding: 50px 40px;
+            transition: all 0.4s ease;
+        }
+        .testimonial-card:hover {
+            border-color: var(--cobalt);
+            transform: translateY(-10px);
+        }
+        .testimonial-quote {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem; line-height: 1.5;
+            margin-bottom: 40px; font-style: italic;
+        }
+        .testimonial-author {
+            display: flex; align-items: center; gap: 20px;
+            padding-top: 30px; border-top: 1px solid rgba(244,243,238,0.2);
+        }
+        .testimonial-author img {
+            width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
+        }
+        .testimonial-author h4 { font-size: 1.2rem; margin-bottom: 5px; }
+        .testimonial-author p { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* CTA */
+        .cta {
+            padding: 150px 50px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-bg-text {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Instrument Serif', serif;
+            font-size: 20vw; color: rgba(0,0,0,0.03);
+            white-space: nowrap; pointer-events: none;
+        }
+        .cta-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .cta h2 {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 1; margin-bottom: 30px;
+        }
+        .cta h2 em { font-style: italic; color: var(--cobalt); }
+        .cta p {
+            font-size: 1.2rem; color: var(--gray);
+            margin-bottom: 50px; line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 50px 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+        }
+        .footer-brand h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.5rem; margin-bottom: 20px;
+        }
+        .footer-brand h3 em { font-style: italic; color: var(--cobalt); }
+        .footer-brand p { color: var(--gray); line-height: 1.6; margin-bottom: 30px; max-width: 400px; }
+        
+        .footer-social { display: flex; gap: 15px; }
+        .footer-social a {
+            width: 45px; height: 45px;
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--ink); text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .footer-social a:hover { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+
+        .footer-section h4 {
+            font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 30px;
+        }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 15px; }
+        .footer-section ul li a {
+            color: var(--gray); text-decoration: none;
+            transition: color 0.3s ease; font-size: 0.95rem;
+        }
+        .footer-section ul li a:hover { color: var(--cobalt); }
+
+        .footer-bottom {
+            display: flex; justify-content: space-between;
+            font-size: 0.8rem; color: var(--gray);
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .cursor { display: none; }
+            body { cursor: auto; }
+            .header { padding: 20px 30px; }
+            .nav-links { display: none; }
+            
+            .hero { grid-template-columns: 1fr; }
+            .hero-content { border-right: none; border-bottom: 1px solid var(--border); padding: 130px 30px 80px; }
+            .hero-visual { min-height: 500px; }
+            
+            .grid-section { grid-template-columns: 1fr; }
+            .grid-block { border-right: none; border-bottom: 1px solid var(--border); padding: 60px 30px; }
+            
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { border-right: none; }
+            
+            .process-timeline { grid-template-columns: 1fr; }
+            .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+            
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:nth-child(2n) { border-right: none; }
+            
+            .testimonials-grid { grid-template-columns: 1fr; }
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="cursor"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">Leandro Hair <em>Capilar</em></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#processo">Processo</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+            </ul>
+        </nav>
+        <a href="https://wa.me/5511999999999" class="header-cta">Agendar</a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-meta">Prótese Capilar Masculina Premium</div>
+            <h1>A arte da <em>confiança</em> reconstruída.</h1>
+            <p class="hero-desc">
+                Precisão, discrição e excelência. Desenvolvemos soluções capilares sob medida 
+                para homens que não aceitam menos que o extraordinário.
+            </p>
+            <div class="hero-actions">
+                <a href="https://wa.me/5511999999999" class="btn-primary">
+                    Agendar Avaliação <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#sobre" class="btn-secondary">
+                    Nossa Filosofia <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&h=1200&fit=crop" alt="Homem confiante">
+            <div class="hero-visual-overlay">
+                <span>●</span> Resultado 100% Natural
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-track">
+            <div class="marquee-item">Precisão <div class="dot"></div> <em>Discrição</em> <div class="dot"></div> Excelência <div class="dot"></div> <em>Confiança</em> <div class="dot"></div></div>
+            <div class="marquee-item">Precisão <div class="dot"></div> <em>Discrição</em> <div class="dot"></div> Excelência <div class="dot"></div> <em>Confiança</em> <div class="dot"></div></div>
+        </div>
+    </div>
+
+    <!-- About Grid -->
+    <section class="grid-section" id="sobre">
+        <div class="grid-block">
+            <span class="section-label">01 — Nossa Filosofia</span>
+            <h2>Mais que estética, <em>identidade</em>.</h2>
+            <p>
+                Acreditamos que a autoestima é a base de toda conquista. Nossa missão é 
+                devolver aos homens o controle sobre sua imagem, com a sutileza e a 
+                sofisticação que o momento exige.
+            </p>
+            <p>
+                Cada prótese é uma obra de engenharia capilar, desenvolvida para ser 
+                indetectável, confortável e duradoura.
+            </p>
+        </div>
+        <div class="grid-block">
+            <span class="section-label">02 — Números que Falam</span>
+            <h2>Excelência <em>comprovada</em>.</h2>
+            <p>
+                Anos de dedicação ao aperfeiçoamento de nossas técnicas resultam em 
+                índices de satisfação que nos orgulhamos em apresentar.
+            </p>
+            <div class="stats-row">
+                <div>
+                    <div class="stat-num">500+</div>
+                    <div class="stat-label">Clientes</div>
+                </div>
+                <div>
+                    <div class="stat-num">8+</div>
+                    <div class="stat-label">Anos</div>
+                </div>
+                <div>
+                    <div class="stat-num">100%</div>
+                    <div class="stat-label">Natural</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="servicos">
+        <div class="services-header">
+            <div>
+                <span class="section-label">Nossos Serviços</span>
+                <h2>Soluções <em>completas</em></h2>
+            </div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-num">01</div>
+                <h3>Prótese Capilar</h3>
+                <p class="service-desc">Soluções personalizadas com tecnologia de última geração para resultados indetectáveis e conforto absoluto.</p>
+                <span class="service-link">Detalhes <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="service-card">
+                <div class="service-num">02</div>
+                <h3>Aplicação</h3>
+                <p class="service-desc">Processo realizado por especialistas em ambiente privativo, garantindo fixação segura e acabamento impecável.</p>
+                <span class="service-link">Detalhes <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="service-card">
+                <div class="service-num">03</div>
+                <h3>Manutenção</h3>
+                <p class="service-desc">Acompanhamento contínuo com higienização, ajustes e revitalização para manter sua prótese sempre perfeita.</p>
+                <span class="service-link">Detalhes <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="service-card">
+                <div class="service-num">04</div>
+                <h3>Consultoria</h3>
+                <p class="service-desc">Avaliação individualizada para entender suas necessidades e criar o plano perfeito para seu caso.</p>
+                <span class="service-link">Detalhes <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="service-card">
+                <div class="service-num">05</div>
+                <h3>Revitalização</h3>
+                <p class="service-desc">Cuidados especializados com produtos de alta qualidade para manter o aspecto natural e duradouro.</p>
+                <span class="service-link">Detalhes <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="service-card">
+                <div class="service-num">06</div>
+                <h3>Suporte</h3>
+                <p class="service-desc">Atendimento dedicado para tirar dúvidas, oferecer orientações e garantir sua satisfação a longo prazo.</p>
+                <span class="service-link">Detalhes <i class="fas fa-arrow-right"></i></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="processo">
+        <div class="process-header">
+            <span class="section-label">Como Funciona</span>
+            <h2>Nosso <em>processo</em></h2>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-num">01</div>
+                <h3>Consulta</h3>
+                <p>Conversa discreta para entender suas expectativas e avaliar o couro cabeludo.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">02</div>
+                <h3>Design</h3>
+                <p>Escolha de cor, textura e densidade que harmonizam com suas características.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">03</div>
+                <h3>Aplicação</h3>
+                <p>Processo em ambiente privativo, com conforto absoluto e resultado imediato.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">04</div>
+                <h3>Acompanhamento</h3>
+                <p>Suporte contínuo e manutenções periódicas para garantir durabilidade.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="galeria">
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=600&fit=crop" alt="Resultado">
+            <div class="gallery-overlay">
+                <h4>Carlos, 42</h4>
+                <p>São Paulo, SP</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=600&h=600&fit=crop" alt="Resultado">
+            <div class="gallery-overlay">
+                <h4>Ricardo, 38</h4>
+                <p>Rio de Janeiro, RJ</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=600&fit=crop" alt="Resultado">
+            <div class="gallery-overlay">
+                <h4>Fernando, 45</h4>
+                <p>Belo Horizonte, MG</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop" alt="Resultado">
+            <div class="gallery-overlay">
+                <h4>André, 35</h4>
+                <p>Curitiba, PR</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="depoimentos">
+        <div class="testimonials-header">
+            <span class="section-label">Depoimentos</span>
+            <h2>Histórias <em>reais</em></h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"Voltei a me sentir confiante em qualquer ocasião. O resultado é tão natural que ninguém percebe."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Carlos">
+                    <div>
+                        <h4>Carlos Mendes</h4>
+                        <p>Empresário</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"Atendimento impecável e resultado extremamente natural. Finalmente encontrei o lugar certo."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=100&h=100&fit=crop" alt="Ricardo">
+                    <div>
+                        <h4>Ricardo Almeida</h4>
+                        <p>Advogado</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"A experiência foi discreta, acolhedora e transformadora. Minha autoestima voltou a subir."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Fernando">
+                    <div>
+                        <h4>Fernando Souza</h4>
+                        <p>Médico</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contato">
+        <div class="cta-bg-text">ÍNTEGRA</div>
+        <div class="cta-content">
+            <span class="section-label">Próximo Passo</span>
+            <h2>Sua melhor versão <em>começa aqui</em>.</h2>
+            <p>Agende uma avaliação gratuita e descubra como podemos transformar sua imagem com naturalidade, discrição e excelência.</p>
+            <a href="https://wa.me/5511999999999" class="btn-primary">
+                <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Leandro Hair <em>Capilar</em></h3>
+                <p>Excelência em prótese capilar masculina. Transformando vidas com tecnologia, discrição e resultados naturais desde 2018.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#">Prótese Capilar</a></li>
+                    <li><a href="#">Aplicação</a></li>
+                    <li><a href="#">Manutenção</a></li>
+                    <li><a href="#">Consultoria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">Av. Paulista, 1000</a></li>
+                    <li><a href="#">São Paulo - SP</a></li>
+                    <li><a href="#">(11) 99999-9999</a></li>
+                    <li><a href="#">contato@leandrohair.com.br</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Leandro Hair. Todos os direitos reservados.</p>
+            <p>Design & Precision</p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+        });
+        document.querySelectorAll('a, button, .service-card, .gallery-item, .testimonial-card, .process-step').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leandro Hair | Redescubra Sua Melhor Versão</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --terracota: #c67c5c;
+            --terracota-dark: #a86548;
+            --bege: #e8dfd8;
+            --bege-dark: #d4c4b8;
+            --oliva: #6b705c;
+            --oliva-dark: #55594a;
+            --creme: #f5f1eb;
+            --preto: #2d2d2d;
+            --branco: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: var(--creme);
+            color: var(--preto);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.8rem;
+            color: var(--branco);
+            text-decoration: none;
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--branco);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--branco);
+            color: var(--preto);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--terracota);
+            color: var(--branco);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            padding: 200px 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--terracota);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--terracota);
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 7vw, 6.5rem);
+            line-height: 0.95;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--terracota);
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--oliva);
+            max-width: 450px;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--preto);
+            color: var(--branco);
+            padding: 20px 45px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--preto);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--preto);
+            transform: translateX(10px);
+        }
+
+        .btn-text {
+            color: var(--preto);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            transition: gap 0.3s ease;
+        }
+
+        .btn-text:hover {
+            gap: 20px;
+        }
+
+        .hero-visual {
+            position: relative;
+            background: var(--bege);
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-shape {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: var(--terracota);
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .hero-number {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--branco);
+            background: rgba(0,0,0,0.6);
+            padding: 15px 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Diagonal Section */
+        .diagonal-section {
+            background: var(--preto);
+            padding: 100px 0;
+            position: relative;
+            transform: skewY(-3deg);
+            margin: 50px 0;
+        }
+
+        .diagonal-content {
+            transform: skewY(3deg);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .diagonal-text h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--branco);
+            font-style: italic;
+            line-height: 1.1;
+        }
+
+        .diagonal-text p {
+            color: var(--bege);
+            font-size: 1.1rem;
+            margin-top: 20px;
+            max-width: 500px;
+        }
+
+        .diagonal-stats {
+            display: flex;
+            gap: 60px;
+        }
+
+        .diag-stat {
+            text-align: center;
+        }
+
+        .diag-stat-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4rem;
+            color: var(--terracota);
+            font-style: italic;
+            display: block;
+        }
+
+        .diag-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--bege);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        /* About Split */
+        .about {
+            padding: 150px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-images {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .about-img {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-img.tall {
+            grid-row: span 2;
+            height: 100%;
+        }
+
+        .about-content {
+            padding: 40px;
+        }
+
+        .about-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--terracota);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .about h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 30px;
+            line-height: 1.1;
+            font-style: italic;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--oliva);
+            margin-bottom: 20px;
+        }
+
+        .about-list {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .about-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--bege);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1rem;
+        }
+
+        .about-list li::before {
+            content: '→';
+            color: var(--terracota);
+            font-weight: bold;
+        }
+
+        /* Services Cards */
+        .services {
+            padding: 150px 60px;
+            background: var(--bege);
+            position: relative;
+        }
+
+        .services-header {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .services-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--terracota);
+        }
+
+        .services h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-style: italic;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .service-card {
+            background: var(--branco);
+            padding: 50px 40px;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--terracota);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--terracota);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .service-card p {
+            color: var(--oliva);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .service-link {
+            color: var(--preto);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 15px;
+        }
+
+        /* Process Timeline */
+        .process {
+            padding: 150px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .process-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--terracota);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .process h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-style: italic;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--terracota), var(--oliva));
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--branco);
+            border: 3px solid var(--terracota);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--terracota);
+        }
+
+        .process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .process-step p {
+            font-size: 0.95rem;
+            color: var(--oliva);
+            line-height: 1.6;
+        }
+
+        /* Gallery Masonry */
+        .gallery {
+            padding: 150px 60px;
+            background: var(--preto);
+        }
+
+        .gallery-header {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .gallery-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--branco);
+            font-style: italic;
+        }
+
+        .gallery-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--terracota);
+        }
+
+        .gallery-masonry {
+            max-width: 1400px;
+            margin: 0 auto;
+            columns: 3;
+            column-gap: 30px;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 30px;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(198, 124, 92, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: var(--branco);
+            font-size: 2.5rem;
+        }
+
+        /* Testimonials Slider */
+        .testimonials {
+            padding: 150px 60px;
+            background: var(--creme);
+            overflow: hidden;
+        }
+
+        .testimonials-header {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            text-align: center;
+        }
+
+        .testimonials-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--terracota);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .testimonials h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-style: italic;
+        }
+
+        .testimonials-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slide {
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .testimonial-quote {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-style: italic;
+            line-height: 1.3;
+            color: var(--preto);
+            margin-bottom: 50px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .testimonial-author img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--terracota);
+        }
+
+        .testimonial-author h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-author p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--oliva);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 60px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bege-dark);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--terracota);
+            transform: scale(1.3);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 200px 60px;
+            background: linear-gradient(135deg, var(--terracota) 0%, var(--oliva) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--branco);
+            margin-bottom: 30px;
+            font-style: italic;
+            line-height: 1;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+
+        .btn-white {
+            background: var(--branco);
+            color: var(--terracota);
+            padding: 25px 60px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--preto);
+            color: var(--branco);
+            padding: 100px 60px 40px;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .footer-brand p {
+            color: var(--bege);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--bege-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--terracota);
+            border-color: var(--terracota);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            color: var(--terracota);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul li a {
+            color: var(--bege);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--branco);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--bege);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav {
+                padding: 20px 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                padding: 150px 40px 80px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .diagonal-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .diagonal-stats {
+                gap: 40px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .services-grid,
+            .process-timeline,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-timeline::before {
+                display: none;
+            }
+
+            .gallery-masonry {
+                columns: 2;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .gallery-masonry {
+                columns: 1;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="logo">Leandro Hair</a>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#processo">Processo</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+        </ul>
+        <a href="https://wa.me/5511999999999" class="nav-cta">Agendar</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-label">Prótese Capilar Masculina</div>
+            <h1>
+                Sua melhor versão
+                <span>começa aqui</span>
+            </h1>
+            <p class="hero-text">
+                Tecnologia avançada e atendimento personalizado para homens que buscam 
+                resultados naturais e duradouros. Redescubra sua confiança.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/5511999999999" class="btn-primary">
+                    Agendar Avaliação <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#sobre" class="btn-text">
+                    Saiba Mais <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&h=1200&fit=crop" alt="Homem confiante" class="hero-image">
+            <div class="hero-shape"></div>
+            <div class="hero-number">EST. 2018</div>
+        </div>
+    </section>
+
+    <!-- Diagonal Section -->
+    <div class="diagonal-section">
+        <div class="diagonal-content">
+            <div class="diagonal-text">
+                <h2>Excelência que transforma vidas e restaura a autoestima</h2>
+                <p>Mais de 500 homens já recuperaram sua confiança com nossos tratamentos personalizados.</p>
+            </div>
+            <div class="diagonal-stats">
+                <div class="diag-stat">
+                    <span class="diag-stat-number">500+</span>
+                    <div class="diag-stat-label">Clientes</div>
+                </div>
+                <div class="diag-stat">
+                    <span class="diag-stat-number">8+</span>
+                    <div class="diag-stat-label">Anos</div>
+                </div>
+                <div class="diag-stat">
+                    <span class="diag-stat-number">100%</span>
+                    <div class="diag-stat-label">Natural</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="about-images">
+            <div class="about-img tall">
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=800&fit=crop" alt="Aplicação">
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102eb1b?w=600&h=500&fit=crop" alt="Consultoria">
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=600&h=500&fit=crop" alt="Resultado">
+            </div>
+        </div>
+        <div class="about-content">
+            <span class="about-label">Sobre Nós</span>
+            <h2>Compromisso com resultados naturais e duradouros</h2>
+            <p>
+                Na Leandro Hair, combinamos tecnologia de ponta com atendimento humanizado 
+                para oferecer soluções capilares que respeitam sua individualidade.
+            </p>
+            <p>
+                Nossa equipe especializada está comprometida em entregar não apenas um serviço, 
+                mas uma experiência transformadora que recupera sua autoestima e confiança.
+            </p>
+            <ul class="about-list">
+                <li>Atendimento personalizado e sigiloso</li>
+                <li>Materiais premium importados</li>
+                <li>Técnicas avançadas de aplicação</li>
+                <li>Manutenção e suporte contínuo</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="servicos">
+        <div class="services-header">
+            <div>
+                <span class="services-label">Nossos Serviços</span>
+                <h2>Soluções completas</h2>
+            </div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-number">01</div>
+                <h3>Prótese Capilar</h3>
+                <p>Soluções personalizadas com tecnologia de última geração para resultados indetectáveis e conforto absoluto no dia a dia.</p>
+                <a href="#" class="service-link">
+                    Saiba Mais <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <h3>Aplicação Profissional</h3>
+                <p>Processo realizado por especialistas em ambiente privativo, garantindo fixação segura e acabamento impecável.</p>
+                <a href="#" class="service-link">
+                    Saiba Mais <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <h3>Manutenção</h3>
+                <p>Acompanhamento contínuo com higienização, ajustes e revitalização para manter sua prótese sempre perfeita.</p>
+                <a href="#" class="service-link">
+                    Saiba Mais <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="processo">
+        <div class="process-header">
+            <span class="process-label">Como Funciona</span>
+            <h2>Processo simples e eficaz</h2>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <h3>Consulta</h3>
+                <p>Avaliação individualizada para entender suas necessidades e expectativas.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <h3>Personalização</h3>
+                <p>Escolha de cor, textura e densidade que combinam com você.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <h3>Aplicação</h3>
+                <p>Processo rápido, confortável e com resultado imediato.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">04</div>
+                <h3>Acompanhamento</h3>
+                <p>Suporte contínuo e manutenções periódicas inclusas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="galeria">
+        <div class="gallery-header">
+            <span class="gallery-label">Galeria</span>
+            <h2>Resultados reais</h2>
+        </div>
+        <div class="gallery-masonry">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=600&h=800&fit=crop" alt="Resultado 1">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=700&fit=crop" alt="Resultado 2">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=600&fit=crop" alt="Resultado 3">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=800&fit=crop" alt="Resultado 4">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&h=500&fit=crop" alt="Resultado 5">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1616391182219-e080b4d1043a?w=600&h=700&fit=crop" alt="Resultado 6">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-header">
+            <span class="testimonials-label">Depoimentos</span>
+            <h2>O que dizem nossos clientes</h2>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial-slide active">
+                <p class="testimonial-quote">"Voltei a me sentir confiante em qualquer situação. O resultado é tão natural que ninguém percebe. Atendimento impecável!"</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Carlos">
+                    <div>
+                        <h4>Carlos Mendes</h4>
+                        <p>Empresário, 42 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-quote">"Finalmente encontrei um lugar que entende o que o homem moderno precisa. Discrição, qualidade e resultado natural."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=100&h=100&fit=crop" alt="Ricardo">
+                    <div>
+                        <h4>Ricardo Almeida</h4>
+                        <p>Advogado, 38 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-quote">"Minha autoestima mudou completamente. Profissionais qualificados e um resultado que superou todas as expectativas."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Fernando">
+                    <div>
+                        <h4>Fernando Souza</h4>
+                        <p>Médico, 45 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-dots">
+                <button class="dot active" data-slide="0"></button>
+                <button class="dot" data-slide="1"></button>
+                <button class="dot" data-slide="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Pronto para se transformar?</h2>
+            <p>Agende uma avaliação gratuita e descubra como podemos ajudar você a recuperar sua confiança e autoestima.</p>
+            <a href="https://wa.me/5511999999999" class="btn-white">
+                <i class="fab fa-whatsapp"></i>
+                Agendar pelo WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Leandro Hair</h3>
+                <p>Excelência em prótese capilar masculina. Transformando vidas com tecnologia, discrição e resultados naturais desde 2018.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#">Prótese Capilar</a></li>
+                    <li><a href="#">Aplicação</a></li>
+                    <li><a href="#">Manutenção</a></li>
+                    <li><a href="#">Consultoria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">Av. Paulista, 1000</a></li>
+                    <li><a href="#">São Paulo - SP</a></li>
+                    <li><a href="#">(11) 99999-9999</a></li>
+                    <li><a href="#">contato@leandrohair.com.br</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Leandro Hair. Todos os direitos reservados.</p>
+            <p>Desenvolvido com excelência</p>
+        </div>
+    </footer>
+
+    <script>
+        // Testimonials Slider
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 6000);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .process-step, .gallery-item').forEach((el) => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            el.style.transition = "all 0.6s ease";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

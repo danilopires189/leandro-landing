@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leandro Hair | Naturalidade Premium</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8f3ec;
+      --bg-soft: #eee2d4;
+      --cream: #fffaf3;
+      --dark: #201c18;
+      --brown: #6d5546;
+      --muted: #897b70;
+      --sage: #97a58d;
+      --rose: #c8a199;
+      --gold: #b9975b;
+      --glass: rgba(255, 255, 255, 0.58);
+      --border: rgba(255, 255, 255, 0.55);
+      --shadow: 0 30px 90px rgba(51, 39, 30, 0.16);
+      --radius: 34px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(200, 161, 153, 0.32), transparent 32%),
+        radial-gradient(circle at 90% 10%, rgba(151, 165, 141, 0.32), transparent 30%),
+        var(--bg);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      border: 1px solid rgba(185, 151, 91, 0.35);
+      border-radius: 999px;
+      color: var(--brown);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      background: rgba(255, 250, 243, 0.58);
+      backdrop-filter: blur(12px);
+      margin-bottom: 22px;
+    }
+
+    .tag::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .title {
+      font-family: "Marcellus", serif;
+      font-size: clamp(2.4rem, 6vw, 5.4rem);
+      line-height: 0.98;
+      letter-spacing: -1px;
+      margin-bottom: 22px;
+    }
+
+    .subtitle {
+      max-width: 670px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.8;
+      margin-bottom: 42px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: 0.35s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-dark {
+      background: var(--dark);
+      color: white;
+      box-shadow: 0 18px 45px rgba(32, 28, 24, 0.24);
+    }
+
+    .btn-dark:hover {
+      transform: translateY(-4px);
+      background: var(--brown);
+    }
+
+    .btn-light {
+      background: rgba(255,255,255,0.48);
+      color: var(--dark);
+      border: 1px solid rgba(255,255,255,0.7);
+      backdrop-filter: blur(18px);
+    }
+
+    .btn-light:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.78);
+    }
+
+    /* NAV */
+
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, 92%);
+      z-index: 1000;
+      border-radius: 999px;
+      background: rgba(255, 250, 243, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 15px 45px rgba(42, 33, 28, 0.08);
+      transition: 0.35s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(255, 250, 243, 0.86);
+    }
+
+    .nav-inner {
+      height: 74px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-family: "Marcellus", serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.3px;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--gold);
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      color: var(--brown);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .nav-menu a {
+      opacity: 0.9;
+      transition: 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--gold);
+    }
+
+    .mobile-btn {
+      display: none;
+      border: none;
+      background: var(--dark);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      padding: 140px 0 80px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: center;
+      gap: 54px;
+    }
+
+    .hero h1 {
+      font-family: "Marcellus", serif;
+      font-size: clamp(3.5rem, 8vw, 7.6rem);
+      line-height: 0.89;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+    }
+
+    .hero p {
+      max-width: 630px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.85;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 620px;
+    }
+
+    .stat {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 22px;
+      backdrop-filter: blur(18px);
+    }
+
+    .stat strong {
+      font-family: "Marcellus", serif;
+      font-size: 1.8rem;
+      color: var(--brown);
+      display: block;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 650px;
+    }
+
+    .portrait-card {
+      position: absolute;
+      inset: 0 0 auto auto;
+      width: 82%;
+      height: 620px;
+      border-radius: 46px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+    }
+
+    .portrait-card img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 0;
+      bottom: 72px;
+      width: 310px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.64);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(22px);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .floating-card h3 {
+      font-family: "Marcellus", serif;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .floating-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .circle-blur {
+      position: absolute;
+      right: -80px;
+      bottom: 50px;
+      width: 250px;
+      height: 250px;
+      background: rgba(185, 151, 91, 0.23);
+      border-radius: 50%;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    /* SERVICES */
+
+    .services-layout {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 38px;
+      align-items: start;
+    }
+
+    .sticky-text {
+      position: sticky;
+      top: 130px;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .service-item {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 18px 60px rgba(60, 45, 34, 0.08);
+      transition: 0.35s ease;
+    }
+
+    .service-item:hover {
+      transform: translateX(-8px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-item img {
+      height: 150px;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+
+    .service-item h3 {
+      font-family: "Marcellus", serif;
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+    }
+
+    .service-item p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* PROCESS */
+
+    .process {
+      background: linear-gradient(135deg, rgba(255,250,243,0.65), rgba(238,226,212,0.92));
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 45px;
+    }
+
+    .step {
+      position: relative;
+      min-height: 280px;
+      padding: 30px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow);
+    }
+
+    .step-number {
+      font-family: "Marcellus", serif;
+      font-size: 4.8rem;
+      color: rgba(185, 151, 91, 0.22);
+      line-height: 1;
+      margin-bottom: 26px;
+    }
+
+    .step h3 {
+      font-family: "Marcellus", serif;
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* RESULT SPLIT */
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .image-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .image-mosaic img {
+      height: 310px;
+      object-fit: cover;
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .image-mosaic img:nth-child(2) {
+      margin-top: 70px;
+    }
+
+    .feature-points {
+      display: grid;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .point {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.48);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .point-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--sage);
+      color: white;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .point h4 {
+      margin-bottom: 4px;
+    }
+
+    .point p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* GALLERY */
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 1fr;
+      gap: 18px;
+      margin-top: 45px;
+    }
+
+    .gallery-card {
+      min-height: 330px;
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-card.tall {
+      min-height: 520px;
+    }
+
+    .gallery-card img {
+      height: 100%;
+      object-fit: cover;
+      transition: 0.65s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(32,28,24,0.42), transparent 58%);
+      opacity: 0;
+      transition: 0.35s ease;
+    }
+
+    .gallery-card:hover::after {
+      opacity: 1;
+    }
+
+    /* TESTIMONIALS */
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 42px;
+    }
+
+    .testimonial {
+      padding: 34px;
+      border-radius: 34px;
+      background: var(--cream);
+      box-shadow: 0 24px 70px rgba(51, 39, 30, 0.1);
+      border: 1px solid rgba(185, 151, 91, 0.12);
+    }
+
+    .stars {
+      color: var(--gold);
+      margin-bottom: 22px;
+      letter-spacing: 4px;
+    }
+
+    .testimonial p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
+
+    .testimonial strong {
+      font-family: "Marcellus", serif;
+      font-size: 1.18rem;
+    }
+
+    /* FAQ */
+
+    .faq {
+      background: rgba(255, 250, 243, 0.6);
+    }
+
+    .faq-wrap {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 46px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(109, 85, 70, 0.18);
+      padding: 22px 0;
+    }
+
+    .faq-question {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-family: "Marcellus", serif;
+      font-size: 1.35rem;
+      color: var(--dark);
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+      gap: 20px;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.35s ease;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-right: 40px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 180px;
+      padding-top: 14px;
+    }
+
+    /* CTA */
+
+    .cta {
+      padding: 115px 0;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 86px 40px;
+      border-radius: 48px;
+      background:
+        linear-gradient(135deg, rgba(32,28,24,0.78), rgba(109,85,70,0.56)),
+        url("https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+      color: white;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .cta-box h2 {
+      font-family: "Marcellus", serif;
+      font-size: clamp(2.5rem, 6vw, 5.4rem);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .cta-box p {
+      max-width: 650px;
+      margin: 0 auto 34px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.8;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #1f1a16;
+      color: rgba(255,255,255,0.68);
+      padding: 72px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 34px;
+      margin-bottom: 46px;
+    }
+
+    footer h3,
+    footer h4 {
+      color: white;
+      font-family: "Marcellus", serif;
+      margin-bottom: 18px;
+    }
+
+    footer h3 {
+      font-size: 1.75rem;
+    }
+
+    footer p,
+    footer a {
+      color: rgba(255,255,255,0.66);
+      font-size: 0.94rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    footer a:hover {
+      color: var(--gold);
+    }
+
+    .copy {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 26px;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.42);
+    }
+
+    /* ANIMATION */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: 0.85s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1020px) {
+      .hero-grid,
+      .services-layout,
+      .split,
+      .faq-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-text {
+        position: relative;
+        top: 0;
+      }
+
+      .hero-visual {
+        min-height: 570px;
+      }
+
+      .portrait-card {
+        width: 88%;
+        height: 540px;
+      }
+
+      .process-grid,
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 92px;
+        right: -110%;
+        width: 82%;
+        height: calc(100vh - 110px);
+        background: rgba(255, 250, 243, 0.95);
+        backdrop-filter: blur(24px);
+        border-radius: 34px;
+        flex-direction: column;
+        padding: 44px;
+        box-shadow: var(--shadow);
+        transition: 0.35s ease;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .mobile-btn {
+        display: block;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .section {
+        padding: 78px 0;
+      }
+
+      .hero {
+        padding-top: 125px;
+      }
+
+      .hero-stats,
+      .process-grid,
+      .testimonials-grid,
+      .footer-grid,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 520px;
+      }
+
+      .portrait-card {
+        width: 100%;
+        height: 470px;
+        transform: none;
+      }
+
+      .floating-card {
+        left: 18px;
+        right: 18px;
+        bottom: 0;
+        width: auto;
+      }
+
+      .service-item {
+        grid-template-columns: 1fr;
+      }
+
+      .service-item img {
+        height: 240px;
+      }
+
+      .image-mosaic {
+        grid-template-columns: 1fr;
+      }
+
+      .image-mosaic img:nth-child(2) {
+        margin-top: 0;
+      }
+
+      .gallery-card,
+      .gallery-card.tall {
+        min-height: 360px;
+      }
+
+      .cta-box {
+        padding: 62px 24px;
+        border-radius: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#inicio" class="brand">Leandro Hair <span>Capilar</span></a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#processo">Processo</a></li>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#faq">Dúvidas</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+
+      <button class="mobile-btn" id="mobileBtn">☰</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <span class="tag">Beauty tech capilar</span>
+          <h1>Sua imagem com mais presença, leveza e naturalidade.</h1>
+          <p>
+            Prótese capilar premium para quem busca um resultado discreto,
+            confortável e sofisticado, com atendimento personalizado do início ao fim.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contato" class="btn btn-dark">Agendar avaliação</a>
+            <a href="#servicos" class="btn btn-light">Conhecer serviços</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>01</strong>
+              <span>Avaliação individual</span>
+            </div>
+
+            <div class="stat">
+              <strong>02</strong>
+              <span>Aplicação sob medida</span>
+            </div>
+
+            <div class="stat">
+              <strong>03</strong>
+              <span>Resultado natural</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="portrait-card">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=85" alt="Pessoa confiante com cabelo natural">
+          </div>
+
+          <div class="floating-card">
+            <h3>Resultado imperceptível</h3>
+            <p>
+              Técnicas modernas, acabamento refinado e visual pensado para combinar
+              com sua identidade.
+            </p>
+          </div>
+
+          <div class="circle-blur"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicos">
+      <div class="container services-layout">
+        <div class="sticky-text reveal">
+          <span class="tag">Serviços premium</span>
+          <h2 class="title">Soluções feitas para parecerem suas.</h2>
+          <p class="subtitle">
+            Cada detalhe é escolhido com cuidado: densidade, cor, textura, encaixe,
+            estilo e manutenção. O objetivo é um visual natural, confortável e seguro.
+          </p>
+          <a href="#contato" class="btn btn-dark">Falar com especialista</a>
+        </div>
+
+        <div class="service-list">
+          <article class="service-item reveal">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=85" alt="Prótese capilar masculina">
+            <div>
+              <h3>Prótese capilar masculina</h3>
+              <p>
+                Solução sob medida para homens que desejam recuperar volume,
+                presença e confiança com acabamento natural.
+              </p>
+            </div>
+          </article>
+
+          <article class="service-item reveal">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=700&q=85" alt="Prótese capilar feminina">
+            <div>
+              <h3>Prótese capilar feminina</h3>
+              <p>
+                Indicação personalizada para preenchimento, alongamento visual,
+                volume e valorização da imagem.
+              </p>
+            </div>
+          </article>
+
+          <article class="service-item reveal">
+            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=700&q=85" alt="Manutenção capilar">
+            <div>
+              <h3>Manutenção e revitalização</h3>
+              <p>
+                Higienização, ajustes, reposicionamento e cuidado profissional para
+                manter beleza, conforto e durabilidade.
+              </p>
+            </div>
+          </article>
+
+          <article class="service-item reveal">
+            <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=700&q=85" alt="Consultoria capilar">
+            <div>
+              <h3>Consultoria de imagem capilar</h3>
+              <p>
+                Avaliação estética para definir estilo, densidade, corte e acabamento
+                alinhados à sua personalidade.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="processo">
+      <div class="container">
+        <div class="reveal">
+          <span class="tag">Como funciona</span>
+          <h2 class="title">Um processo discreto, seguro e personalizado.</h2>
+          <p class="subtitle">
+            Do primeiro contato à manutenção, tudo é pensado para oferecer uma experiência
+            acolhedora, elegante e sem constrangimentos.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <div class="step reveal">
+            <div class="step-number">01</div>
+            <h3>Avaliação</h3>
+            <p>Analisamos seu perfil, necessidade, rotina e expectativa estética.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-number">02</div>
+            <h3>Personalização</h3>
+            <p>Escolhemos textura, cor, densidade e estilo para um encaixe natural.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-number">03</div>
+            <h3>Aplicação</h3>
+            <p>Realizamos a aplicação com técnica, cuidado e acabamento sofisticado.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-number">04</div>
+            <h3>Acompanhamento</h3>
+            <p>Orientamos cuidados, manutenção e rotina para preservar o resultado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultados">
+      <div class="container split">
+        <div class="image-mosaic reveal">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=85" alt="Resultado masculino natural">
+          <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=85" alt="Cabelo natural feminino">
+        </div>
+
+        <div class="reveal">
+          <span class="tag">Resultado natural</span>
+          <h2 class="title">Nada artificial. Nada exagerado. Apenas você com mais confiança.</h2>
+          <p class="subtitle">
+            A Leandro Hair valoriza resultados elegantes e discretos. O foco é criar
+            uma aparência realista, confortável e alinhada à sua identidade.
+          </p>
+
+          <div class="feature-points">
+            <div class="point">
+              <div class="point-icon">✓</div>
+              <div>
+                <h4>Textura realista</h4>
+                <p>Fios com movimento natural e acabamento refinado.</p>
+              </div>
+            </div>
+
+            <div class="point">
+              <div class="point-icon">✓</div>
+              <div>
+                <h4>Conforto no dia a dia</h4>
+                <p>Soluções leves, seguras e pensadas para sua rotina.</p>
+              </div>
+            </div>
+
+            <div class="point">
+              <div class="point-icon">✓</div>
+              <div>
+                <h4>Discrição absoluta</h4>
+                <p>Atendimento sigiloso em ambiente acolhedor e premium.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="reveal">
+          <span class="tag">Galeria</span>
+          <h2 class="title">Estética real, elegante e acolhedora.</h2>
+          <p class="subtitle">
+            Uma experiência visual focada em pessoas reais, ambientes sofisticados,
+            cuidado profissional e autoestima.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <div class="gallery-card tall reveal">
+            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=900&q=85" alt="Cabelo natural">
+          </div>
+
+          <div class="gallery-card reveal">
+            <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=900&q=85" alt="Ambiente premium capilar">
+          </div>
+
+          <div class="gallery-card tall reveal">
+            <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=900&q=85" alt="Pessoa confiante">
+          </div>
+
+          <div class="gallery-card reveal">
+            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=85" alt="Salão sofisticado">
+          </div>
+
+          <div class="gallery-card reveal">
+            <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=900&q=85" alt="Atendimento capilar">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="reveal">
+          <span class="tag">Depoimentos</span>
+          <h2 class="title">Confiança que aparece no espelho.</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+              “O resultado ficou muito natural. Me senti respeitado desde o primeiro atendimento.”
+            </p>
+            <strong>Marcos A.</strong>
+          </div>
+
+          <div class="testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Eu tinha medo de ficar artificial, mas ficou leve, discreto e muito bonito.”
+            </p>
+            <strong>Renata C.</strong>
+          </div>
+
+          <div class="testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+              “O atendimento foi sigiloso, acolhedor e profissional. Recomendo muito.”
+            </p>
+            <strong>André L.</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="container faq-wrap">
+        <div class="reveal">
+          <span class="tag">Dúvidas frequentes</span>
+          <h2 class="title">Tudo o que você precisa saber antes de começar.</h2>
+          <p class="subtitle">
+            Respostas diretas para tornar sua decisão mais segura, tranquila e informada.
+          </p>
+        </div>
+
+        <div class="faq-list reveal">
+          <div class="faq-item active">
+            <button class="faq-question">
+              A prótese capilar fica natural?
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              Sim. Quando bem escolhida e aplicada, a prótese capilar se integra ao visual
+              com aparência natural, respeitando cor, textura, densidade e estilo.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              O atendimento é sigiloso?
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              Sim. Todo o processo é feito com discrição, cuidado e respeito à privacidade
+              de cada cliente.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Precisa fazer manutenção?
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              Sim. A manutenção ajuda a preservar conforto, fixação, higiene, acabamento
+              e durabilidade da prótese capilar.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Posso escolher o estilo do cabelo?
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              Sim. O estilo é definido conforme seu rosto, rotina, gosto pessoal e objetivo
+              estético.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contato">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>Sua melhor versão começa com confiança.</h2>
+          <p>
+            Agende uma avaliação personalizada e descubra como a prótese capilar pode
+            transformar sua imagem com naturalidade e elegância.
+          </p>
+          <a href="https://wa.me/5511999990000" class="btn btn-light">Agendar pelo WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Leandro Hair</h3>
+          <p>
+            Soluções premium em prótese capilar com foco em naturalidade,
+            discrição e autoestima.
+          </p>
+        </div>
+
+        <div>
+          <h4>Menu</h4>
+          <a href="#inicio">Início</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#processo">Processo</a>
+          <a href="#resultados">Resultados</a>
+        </div>
+
+        <div>
+          <h4>Contato</h4>
+          <p>(11) 99999-0000</p>
+          <p>contato@leandrohair.com.br</p>
+          <p>@leandrohair</p>
+        </div>
+
+        <div>
+          <h4>Endereço</h4>
+          <p>Av. Elegance, 250</p>
+          <p>Sala 805 — Centro</p>
+          <p>Seg. a Sex. das 9h às 18h</p>
+        </div>
+      </div>
+
+      <div class="copy">
+        © 2026 Leandro Hair. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById("nav");
+    const mobileBtn = document.getElementById("mobileBtn");
+    const navMenu = document.getElementById("navMenu");
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 60);
+    });
+
+    mobileBtn.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      mobileBtn.textContent = navMenu.classList.contains("active") ? "×" : "☰";
+    });
+
+    document.querySelectorAll(".nav-menu a").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        mobileBtn.textContent = "☰";
+      });
+    });
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight - 110) {
+          element.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+      const question = item.querySelector(".faq-question");
+
+      question.addEventListener("click", () => {
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove("active");
+          }
+        });
+
+        item.classList.toggle("active");
+      });
+    });
+  </script>
+
+</body>
+</html>

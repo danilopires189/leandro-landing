@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leandro Hair — Confiança que Transforma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #FFFBF5;
+            --purple: #6C5CE7;
+            --pink: #FD79A8;
+            --yellow: #FDCB6E;
+            --mint: #00B894;
+            --coral: #FF7675;
+            --dark: #2D3436;
+            --gray: #636E72;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Clash Display', sans-serif; }
+
+        /* Floating Shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape-1 { width: 100px; height: 100px; background: var(--purple); top: 10%; left: 5%; animation-delay: 0s; }
+        .shape-2 { width: 60px; height: 60px; background: var(--pink); top: 20%; right: 10%; animation-delay: 2s; }
+        .shape-3 { width: 80px; height: 80px; background: var(--yellow); bottom: 15%; left: 15%; animation-delay: 4s; }
+        .shape-4 { width: 50px; height: 50px; background: var(--mint); bottom: 25%; right: 20%; animation-delay: 1s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            background: rgba(255, 251, 245, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .logo {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.8rem; font-weight: 700;
+            color: var(--dark);
+        }
+        .logo span { color: var(--purple); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--dark);
+            font-size: 0.9rem; font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--purple); }
+        .header-cta {
+            background: var(--purple); color: white;
+            padding: 12px 28px; border-radius: 100px;
+            text-decoration: none; font-weight: 700; font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .header-cta:hover { background: var(--pink); transform: scale(1.05); }
+
+        /* HERO - PLAYFUL INTRO */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 150px 50px 100px;
+            overflow: hidden;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+        
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--yellow);
+            padding: 10px 25px; border-radius: 100px;
+            font-weight: 700; font-size: 0.9rem;
+            margin-bottom: 30px;
+            animation: bounceIn 0.8s ease 0.5s both;
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 7vw, 6.5rem);
+            line-height: 1;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .hero h1 .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(50px) rotate(-10deg);
+            animation: wordPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+        .hero h1 .word:nth-child(1) { animation-delay: 0.8s; color: var(--dark); }
+        .hero h1 .word:nth-child(2) { animation-delay: 1s; color: var(--purple); }
+        .hero h1 .word:nth-child(3) { animation-delay: 1.2s; color: var(--pink); }
+        .hero h1 .word:nth-child(4) { animation-delay: 1.4s; color: var(--mint); }
+        @keyframes wordPop {
+            to { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+
+        .hero-desc {
+            font-size: 1.2rem; line-height: 1.6;
+            max-width: 500px; color: var(--gray);
+            margin-bottom: 40px;
+            animation: slideInLeft 0.8s ease 1.6s both;
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-actions {
+            display: flex; gap: 20px; flex-wrap: wrap;
+            animation: slideInLeft 0.8s ease 1.8s both;
+        }
+        .btn-playful {
+            background: var(--purple); color: white;
+            padding: 18px 40px; border-radius: 100px;
+            text-decoration: none; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+        }
+        .btn-playful:hover {
+            background: var(--pink);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(253, 121, 168, 0.4);
+        }
+        .btn-outline-playful {
+            background: transparent; color: var(--dark);
+            padding: 18px 40px; border-radius: 100px;
+            text-decoration: none; font-weight: 700;
+            border: 3px solid var(--dark);
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: all 0.3s;
+        }
+        .btn-outline-playful:hover {
+            background: var(--dark); color: white;
+            transform: translateY(-5px);
+        }
+
+        .hero-visual {
+            position: relative; z-index: 2;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .hero-image-container {
+            position: relative;
+            width: 100%; max-width: 500px;
+        }
+        .hero-image-container img {
+            width: 100%; aspect-ratio: 4/5; object-fit: cover;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            animation: bounceIn 1s ease 1s both;
+        }
+        .hero-sticker {
+            position: absolute;
+            background: var(--coral);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(255, 118, 117, 0.3);
+            animation: bounceIn 0.8s ease 1.5s both;
+        }
+        .hero-sticker.sticker-1 {
+            top: -20px; right: -20px;
+            transform: rotate(15deg);
+        }
+        .hero-sticker.sticker-2 {
+            bottom: 40px; left: -30px;
+            background: var(--mint);
+            transform: rotate(-10deg);
+            animation-delay: 1.8s;
+        }
+        .hero-sticker .big { font-size: 2rem; display: block; }
+        .hero-sticker .small { font-size: 0.8rem; opacity: 0.9; }
+
+        /* Marquee */
+        .marquee {
+            background: var(--purple);
+            padding: 25px 0; overflow: hidden;
+            transform: rotate(-2deg) scale(1.05);
+            margin: 50px 0;
+        }
+        .marquee-track {
+            display: flex; gap: 60px;
+            animation: marquee 20s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2.5rem; font-weight: 700;
+            white-space: nowrap; color: white;
+            display: flex; align-items: center; gap: 60px;
+        }
+        .marquee-item .emoji { font-size: 3rem; }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Features */
+        .features {
+            padding: 120px 50px;
+            position: relative;
+        }
+        .features-header {
+            max-width: 1400px; margin: 0 auto 80px;
+            text-align: center;
+        }
+        .features-header .label {
+            font-weight: 700; font-size: 0.9rem;
+            color: var(--purple); margin-bottom: 20px; display: block;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .features-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+        }
+        .features-header h2 span { color: var(--pink); }
+
+        .features-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .feature-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .feature-card::before {
+            content: ''; position: absolute;
+            top: -50%; right: -50%;
+            width: 200px; height: 200px;
+            background: var(--yellow);
+            border-radius: 50%;
+            opacity: 0.3;
+            transition: all 0.6s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px) rotate(-2deg);
+            box-shadow: 0 20px 50px rgba(108, 92, 231, 0.2);
+        }
+        .feature-card:hover::before { transform: scale(2); }
+        .feature-icon {
+            width: 70px; height: 70px;
+            background: var(--purple);
+            color: white;
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative; z-index: 1;
+            transition: all 0.3s;
+        }
+        .feature-card:hover .feature-icon {
+            background: var(--pink);
+            transform: rotate(360deg);
+        }
+        .feature-card h3 {
+            font-size: 1.8rem; margin-bottom: 15px;
+            position: relative; z-index: 1;
+        }
+        .feature-card p {
+            color: var(--gray); line-height: 1.6;
+            position: relative; z-index: 1;
+        }
+
+        /* Process */
+        .process {
+            padding: 120px 50px;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .process::before {
+            content: ''; position: absolute;
+            top: -100px; right: -100px;
+            width: 400px; height: 400px;
+            background: var(--yellow);
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+        .process-header {
+            max-width: 1400px; margin: 0 auto 80px;
+            text-align: center; position: relative; z-index: 1;
+        }
+        .process-header .label {
+            font-weight: 700; font-size: 0.9rem;
+            color: var(--yellow); margin-bottom: 20px; display: block;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .process-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+        }
+
+        .process-steps {
+            max-width: 1200px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            position: relative; z-index: 1;
+        }
+        .process-step {
+            background: white;
+            color: var(--dark);
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .process-step:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        .step-number {
+            width: 70px; height: 70px;
+            background: var(--purple);
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2rem; font-weight: 700;
+            margin: 0 auto 25px;
+            transition: all 0.3s;
+        }
+        .process-step:hover .step-number {
+            background: var(--pink);
+            transform: rotate(360deg);
+        }
+        .process-step h3 {
+            font-size: 1.5rem; margin-bottom: 15px;
+        }
+        .process-step p {
+            font-size: 0.95rem; color: var(--gray); line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 120px 50px;
+            background: var(--bg);
+        }
+        .testimonials-header {
+            max-width: 1400px; margin: 0 auto 80px;
+            text-align: center;
+        }
+        .testimonials-header .label {
+            font-weight: 700; font-size: 0.9rem;
+            color: var(--purple); margin-bottom: 20px; display: block;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .testimonials-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+        }
+        .testimonials-header h2 span { color: var(--mint); }
+
+        .testimonials-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .testimonial-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            position: relative;
+        }
+        .testimonial-card:nth-child(2) { transform: translateY(40px); }
+        .testimonial-card:hover {
+            transform: translateY(-10px) rotate(-2deg);
+            box-shadow: 0 20px 50px rgba(108, 92, 231, 0.2);
+        }
+        .testimonial-card:nth-child(2):hover { transform: translateY(30px) rotate(2deg); }
+        .testimonial-quote {
+            font-size: 3rem; color: var(--purple);
+            line-height: 1; margin-bottom: -20px;
+        }
+        .testimonial-text {
+            font-size: 1.1rem; line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .testimonial-author {
+            display: flex; align-items: center; gap: 20px;
+            padding-top: 25px; border-top: 2px solid var(--bg);
+        }
+        .testimonial-author img {
+            width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
+        }
+        .testimonial-author h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .testimonial-author p { font-size: 0.85rem; color: var(--gray); }
+
+        /* CTA */
+        .cta {
+            padding: 150px 50px;
+            background: var(--yellow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta::before {
+            content: ''; position: absolute;
+            top: -100px; left: -100px;
+            width: 300px; height: 300px;
+            background: var(--pink);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        .cta::after {
+            content: ''; position: absolute;
+            bottom: -100px; right: -100px;
+            width: 300px; height: 300px;
+            background: var(--mint);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        .cta-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .cta-label {
+            font-weight: 700; font-size: 0.9rem;
+            color: var(--purple); margin-bottom: 30px; display: block;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .cta h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700; margin-bottom: 30px;
+        }
+        .cta h2 span { color: var(--coral); }
+        .cta p {
+            font-size: 1.2rem; color: var(--dark);
+            margin-bottom: 50px; line-height: 1.6;
+        }
+        .btn-cta {
+            background: var(--purple); color: white;
+            padding: 22px 50px; border-radius: 100px;
+            text-decoration: none; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.4);
+        }
+        .btn-cta:hover {
+            background: var(--coral);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 50px 30px;
+        }
+        .footer-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px; margin-bottom: 60px;
+        }
+        .footer-brand h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2rem; margin-bottom: 20px;
+        }
+        .footer-brand h3 span { color: var(--yellow); }
+        .footer-brand p { opacity: 0.7; line-height: 1.6; margin-bottom: 30px; }
+        .footer-social { display: flex; gap: 15px; }
+        .footer-social a {
+            width: 45px; height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-social a:hover { background: var(--purple); transform: translateY(-5px) rotate(360deg); }
+        .footer-section h4 {
+            font-size: 0.9rem; letter-spacing: 2px;
+            margin-bottom: 25px; color: var(--yellow);
+        }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 12px; }
+        .footer-section ul li a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-section ul li a:hover { color: var(--yellow); }
+        .footer-bottom {
+            max-width: 1400px; margin: 0 auto;
+            padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between;
+            font-size: 0.85rem; opacity: 0.6;
+        }
+
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; padding: 130px 30px 80px; }
+            .hero h1 { font-size: 3.5rem; }
+            .features-grid, .process-steps, .testimonials-grid { grid-template-columns: 1fr; }
+            .testimonial-card:nth-child(2) { transform: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Leandro Hair<span>.</span></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#processo">Processo</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+            </ul>
+        </nav>
+        <a href="https://wa.me/5511999999999" class="header-cta">Agendar</a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-badge">✨ Prótese Capilar Premium</div>
+            <h1>
+                <span class="word">Confiança</span>
+                <span class="word">que</span>
+                <span class="word">Transforma</span>
+                <span class="word">Vidas</span>
+            </h1>
+            <p class="hero-desc">
+                Tecnologia de ponta, acabamento natural e atendimento discreto. 
+                Recupere sua autoestima com resultados que impressionam.
+            </p>
+            <div class="hero-actions">
+                <a href="https://wa.me/5511999999999" class="btn-playful">
+                    Começar Agora <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#recursos" class="btn-outline-playful">
+                    Saiba Mais <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&h=900&fit=crop" alt="Homem confiante">
+                <div class="hero-sticker sticker-1">
+                    <span class="big">100%</span>
+                    <span class="small">Natural</span>
+                </div>
+                <div class="hero-sticker sticker-2">
+                    <span class="big">500+</span>
+                    <span class="small">Clientes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-track">
+            <div class="marquee-item">Naturalidade <span class="emoji">🌟</span> Discrição <span class="emoji">💎</span> Excelência <span class="emoji"></span> Confiança <span class="emoji">✨</span></div>
+            <div class="marquee-item">Naturalidade <span class="emoji">🌟</span> Discrição <span class="emoji">💎</span> Excelência <span class="emoji">🚀</span> Confiança <span class="emoji">✨</span></div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <section class="features" id="recursos">
+        <div class="features-header">
+            <span class="label">Por Que Escolher</span>
+            <h2>Diferenciais que fazem a <span>diferença</span></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                <h3>Resultado Natural</h3>
+                <p>Tecnologia avançada que garante aparência 100% natural e indetectável.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                <h3>Especialistas</h3>
+                <p>Equipe altamente qualificada com anos de experiência em prótese capilar.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                <h3>Sigilo Total</h3>
+                <p>Atendimento discreto em ambiente privativo. Sua privacidade é prioridade.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-gem"></i></div>
+                <h3>Materiais Premium</h3>
+                <p>Utilizamos apenas materiais de alta qualidade importados para máximo conforto.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                <h3>Manutenção Inclusa</h3>
+                <p>Suporte contínuo com manutenções periódicas para resultado sempre perfeito.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <h3>Resultado Imediato</h3>
+                <p>Transformação no mesmo dia. Saia renovado e confiante em poucas horas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="processo">
+        <div class="process-header">
+            <span class="label">Como Funciona</span>
+            <h2>Nosso Processo</h2>
+        </div>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <h3>Consulta</h3>
+                <p>Avaliação individualizada para entender suas necessidades.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <h3>Design</h3>
+                <p>Personalização de cor, textura e densidade sob medida.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <h3>Aplicação</h3>
+                <p>Processo rápido, confortável e com resultado imediato.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">04</div>
+                <h3>Acompanhamento</h3>
+                <p>Suporte contínuo e manutenções para durabilidade.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="depoimentos">
+        <div class="testimonials-header">
+            <span class="label">Depoimentos</span>
+            <h2>O que nossos clientes <span>dizem</span></h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">Voltei a me sentir confiante em qualquer ocasião. O resultado é tão natural que ninguém percebe!</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Carlos">
+                    <div>
+                        <h4>Carlos Mendes</h4>
+                        <p>Empresário, 42 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">Atendimento impecável e resultado extremamente natural. Finalmente encontrei o lugar certo!</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=100&h=100&fit=crop" alt="Ricardo">
+                    <div>
+                        <h4>Ricardo Almeida</h4>
+                        <p>Advogado, 38 anos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">A experiência foi discreta, acolhedora e transformadora. Minha autoestima voltou a subir!</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Fernando">
+                    <div>
+                        <h4>Fernando Souza</h4>
+                        <p>Médico, 45 anos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contato">
+        <div class="cta-content">
+            <span class="cta-label">Pronto para começar?</span>
+            <h2>Sua melhor versão <span>começa agora</span></h2>
+            <p>Agende uma avaliação gratuita e descubra como podemos transformar sua imagem.</p>
+            <a href="https://wa.me/5511999999999" class="btn-cta">
+                <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Leandro Hair<span>.</span></h3>
+                <p>Excelência em prótese capilar masculina. Transformando vidas com tecnologia, discrição e resultados naturais desde 2018.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#processo">Processo</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#">Prótese Capilar</a></li>
+                    <li><a href="#">Aplicação</a></li>
+                    <li><a href="#">Manutenção</a></li>
+                    <li><a href="#">Consultoria</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">Av. Paulista, 1000</a></li>
+                    <li><a href="#">São Paulo - SP</a></li>
+                    <li><a href="#">(11) 99999-9999</a></li>
+                    <li><a href="#">contato@leandrohair.com.br</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Leandro Hair. Todos os direitos reservados.</p>
+            <p>Feito com 💜</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .process-step, .testimonial-card').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            el.style.transition = "all 0.6s ease";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

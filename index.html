@@ -143,14 +143,14 @@
     }
 
     .card {
-      min-height: 184px;
+      min-height: 360px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--surface);
-      padding: 20px;
+      overflow: hidden;
       transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
     }
 
@@ -158,6 +158,27 @@
       transform: translateY(-3px);
       border-color: rgba(155, 106, 54, 0.45);
       box-shadow: var(--shadow);
+    }
+
+    .thumb {
+      height: 190px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #efe8dc;
+    }
+
+    .thumb iframe {
+      width: 1920px;
+      height: 1080px;
+      border: 0;
+      transform: scale(0.32);
+      transform-origin: top left;
+      pointer-events: none;
+    }
+
+    .card-body {
+      padding: 18px 18px 0;
     }
 
     .number {
@@ -182,7 +203,7 @@
 
     .open {
       width: fit-content;
-      margin-top: 18px;
+      margin: 18px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -269,73 +290,96 @@
 
     <section class="grid" aria-label="Prévias disponíveis">
       <a class="card" href="./template-01-cinematic-experience.html">
-        <div><span class="number">Prévia 01</span><h2>Cinematic Experience</h2><p>Visual imersivo com narrativa premium.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-01-cinematic-experience.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 01</span><h2>Cinematic Experience</h2><p>Visual imersivo com narrativa premium.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-02-nova-era-confianca.html">
-        <div><span class="number">Prévia 02</span><h2>Nova Era da Confiança</h2><p>Layout sofisticado para posicionamento masculino.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-02-nova-era-confianca.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 02</span><h2>Nova Era da Confiança</h2><p>Layout sofisticado para posicionamento masculino.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-03-precision-confidence.html">
-        <div><span class="number">Prévia 03</span><h2>Precision & Confidence</h2><p>Estilo editorial com tom internacional.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-03-precision-confidence.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 03</span><h2>Precision & Confidence</h2><p>Estilo editorial com tom internacional.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-04-premium-masculino.html">
-        <div><span class="number">Prévia 04</span><h2>Premium Masculino</h2><p>Landing page direta para conversão.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-04-premium-masculino.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 04</span><h2>Premium Masculino</h2><p>Landing page direta para conversão.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-05-new-standard.html">
-        <div><span class="number">Prévia 05</span><h2>The New Standard</h2><p>Apresentação elegante e minimalista.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-05-new-standard.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 05</span><h2>The New Standard</h2><p>Apresentação elegante e minimalista.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-06-resultados-reais-alt.html">
-        <div><span class="number">Prévia 06</span><h2>Resultados Reais Alt</h2><p>Versão com galeria e prova social.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-06-resultados-reais-alt.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 06</span><h2>Resultados Reais Alt</h2><p>Versão com galeria e prova social.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-07-melhor-versao.html">
-        <div><span class="number">Prévia 07</span><h2>Melhor Versão</h2><p>Comunicação acolhedora e aspiracional.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-07-melhor-versao.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 07</span><h2>Melhor Versão</h2><p>Comunicação acolhedora e aspiracional.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-08-confianca-transforma.html">
-        <div><span class="number">Prévia 08</span><h2>Confiança que Transforma</h2><p>Visual limpo com seções bem marcadas.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-08-confianca-transforma.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 08</span><h2>Confiança que Transforma</h2><p>Visual limpo com seções bem marcadas.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-09-nova-era.html">
-        <div><span class="number">Prévia 09</span><h2>Nova Era</h2><p>Abordagem premium com foco em tecnologia.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-09-nova-era.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 09</span><h2>Nova Era</h2><p>Abordagem premium com foco em tecnologia.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-10-bem-estar.html">
-        <div><span class="number">Prévia 10</span><h2>Bem-estar</h2><p>Tom sereno para cuidado e conforto.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-10-bem-estar.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 10</span><h2>Bem-estar</h2><p>Tom sereno para cuidado e conforto.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-11-reinventando-confianca.html">
-        <div><span class="number">Prévia 11</span><h2>Reinventando a Confiança</h2><p>Composição robusta e institucional.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-11-reinventando-confianca.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 11</span><h2>Reinventando a Confiança</h2><p>Composição robusta e institucional.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-12-art-of-confidence.html">
-        <div><span class="number">Prévia 12</span><h2>The Art of Confidence</h2><p>Design refinado para experiência premium.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-12-art-of-confidence.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 12</span><h2>The Art of Confidence</h2><p>Design refinado para experiência premium.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-13-bem-estar-alt.html">
-        <div><span class="number">Prévia 13</span><h2>Bem-estar Alt</h2><p>Variação calma e orgânica.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-13-bem-estar-alt.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 13</span><h2>Bem-estar Alt</h2><p>Variação calma e orgânica.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-14-jornada-transformacao.html">
-        <div><span class="number">Prévia 14</span><h2>Jornada da Transformação</h2><p>Fluxo narrativo com etapas claras.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-14-jornada-transformacao.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 14</span><h2>Jornada da Transformação</h2><p>Fluxo narrativo com etapas claras.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-15-resultados-reais.html">
-        <div><span class="number">Prévia 15</span><h2>Resultados Reais</h2><p>Galeria visual com foco em credibilidade.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-15-resultados-reais.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 15</span><h2>Resultados Reais</h2><p>Galeria visual com foco em credibilidade.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-16-redefina-reflexo.html">
-        <div><span class="number">Prévia 16</span><h2>Redefina Seu Reflexo</h2><p>Mensagem emocional e elegante.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-16-redefina-reflexo.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 16</span><h2>Redefina Seu Reflexo</h2><p>Mensagem emocional e elegante.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-17-processo-interativo.html">
-        <div><span class="number">Prévia 17</span><h2>Processo Interativo</h2><p>Template com navegação por etapas.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-17-processo-interativo.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 17</span><h2>Processo Interativo</h2><p>Template com navegação por etapas.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-18-excelencia-capilar.html">
-        <div><span class="number">Prévia 18</span><h2>Excelência Capilar</h2><p>Completo, institucional e detalhado.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-18-excelencia-capilar.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 18</span><h2>Excelência Capilar</h2><p>Completo, institucional e detalhado.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-19-next-gen-hair-tech.html">
-        <div><span class="number">Prévia 19</span><h2>Next Gen Hair Tech</h2><p>Direção futurista e tecnológica.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-19-next-gen-hair-tech.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 19</span><h2>Next Gen Hair Tech</h2><p>Direção futurista e tecnológica.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-20-premium.html">
-        <div><span class="number">Prévia 20</span><h2>Premium</h2><p>Landing elegante para serviço premium.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-20-premium.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 20</span><h2>Premium</h2><p>Landing elegante para serviço premium.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-21-naturalidade-premium.html">
-        <div><span class="number">Prévia 21</span><h2>Naturalidade Premium</h2><p>Conteúdo amplo com perguntas frequentes.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-21-naturalidade-premium.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 21</span><h2>Naturalidade Premium</h2><p>Conteúdo amplo com perguntas frequentes.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-22-confianca-em-cena.html">
-        <div><span class="number">Prévia 22</span><h2>Confiança em Cena</h2><p>Estética editorial com muita presença.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-22-confianca-em-cena.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 22</span><h2>Confiança em Cena</h2><p>Estética editorial com muita presença.</p></div><span class="open">Abrir</span>
       </a>
       <a class="card" href="./template-23-design-editorial.html">
-        <div><span class="number">Prévia 23</span><h2>Design Editorial</h2><p>Visual leve para apresentação refinada.</p></div><span class="open">Abrir</span>
+        <div class="thumb" aria-hidden="true"><iframe src="./template-23-design-editorial.html" title="Prévia visual"></iframe></div>
+        <div class="card-body"><span class="number">Prévia 23</span><h2>Design Editorial</h2><p>Visual leve para apresentação refinada.</p></div><span class="open">Abrir</span>
       </a>
     </section>
   </main>
